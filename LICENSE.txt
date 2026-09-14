@@ -1,0 +1,49 @@
+===============================================================================
+                       LUANTI MINECLONIA ONEBLOCK
+===============================================================================
+
+Copyright (C) 2026 Knoiax <https://github.com/knoiax>
+
+Este programa es software libre: puedes redistribuirlo y/o modificarlo bajo los 
+términos de la Licencia Pública General GNU publicada por la Free Software 
+Foundation, ya sea la versión 3 de la Licencia, o (a tu elección) cualquier 
+versión posterior.
+
+Este programa se distribuye con la esperanza de que sea útil, pero SIN NINGUNA 
+GARANTÍA; ni siquiera la garantía implícita de COMERCIABILIDAD o APTITUD PARA 
+UN PROPÓSITO DETERMINADO. Consulta la Licencia Pública General GNU para más detalles.
+
+-------------------------------------------------------------------------------
+TERCEROS Y ATRIBUCIONES DE AUTORÍA (CREDITS)
+-------------------------------------------------------------------------------
+Este mod incluye integraciones, lógica o compatibilidad con recursos de la 
+comunidad de Luanti / Mineclonia / Minetest:
+
+* Mineclonia / MineClone 2:
+  - Desarrolladores y colaboradores de Mineclonia (Ryvnf y equipo).
+  - Licencia: GNU GPLv3 (Código) / CC BY-SA 4.0 (Media).
+
+* MCL Bronze Stuff (mcl_bronze_stuff):
+  - Autor original: MiracleNebulae.
+  - Licencia: GNU GPLv3 (Código) / CC BY-SA 4.0 (Media).
+
+* Copper Golem (copper_golem):
+  - Autor original: nando (texturas derivadas de mcl_copper por NO11).
+  - Licencia: GNU GPLv3 (Código) / CC BY-SA 4.0 (Media).
+
+* Italian Food & MoreFood (italian_food / mcl_morefood):
+  - Autores originales de la comunidad de Luanti / Mineclonia.
+  - Licencia: GNU GPLv3 (Código) / CC BY-SA 4.0 (Media).
+
+-------------------------------------------------------------------------------
+GNU GENERAL PUBLIC LICENSE
+Version 3, 29 June 2007
+
+Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>
+Everyone is permitted to copy and distribute verbatim copies
+of this license document, but changing it is not allowed.
+
+Preamble
+The GNU General Public License is a free, copyleft license for software
+and other kinds of works...
+[Para el texto completo de la GPLv3 puedes pegar las cláusulas estándar o mantener este encabezado público]

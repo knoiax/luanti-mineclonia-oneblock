@@ -61,7 +61,7 @@ local ow_standard_loot = {
     "mcl_mobs:spawn_egg_mobs_mc_drowned",
     "mcl_mobs:spawn_egg_mobs_mc_drowned",
     "mcl_mobs:spawn_egg_mobs_mc_drowned",
-    "mcl_mobs:spawn_egg_mobs_mc_endermite,
+    "mcl_mobs:spawn_egg_mobs_mc_endermite",
     "mcl_mobs:spawn_egg_mobs_mc_mooshroom",
     "mcl_mobs:spawn_egg_mobs_mc_mooshroom",
     "mcl_mobs:spawn_egg_mobs_mc_mooshroom",
@@ -143,7 +143,7 @@ local end_special_loot = {
     "mcl_armor:chestplate_diamond_enchanted", 
     "mcl_enchanting:book_enchanted",
     "mcl_totems:totem", 
-    1"mcl_core:apple_gold_enchanted"
+    "mcl_core:apple_gold_enchanted"
 }
 
 -- 3. POOLS DE BLOQUES (Sin cofres en la lista común para evitar spawn excesivo)

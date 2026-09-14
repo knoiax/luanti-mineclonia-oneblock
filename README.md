@@ -17,6 +17,15 @@ Un mod para **mineclonia** que crea un mundo vacío (OneBlock) con un nodo de mi
 - Luanti 5.x o superior
 - Mods requeridos: `default` (si aplica)
 
-## 📜 Licencia
-- Código: [MIT / GPL-3.0]
-- Arte / Sonidos: [CC BY-SA 4.0]
+## 📜 Licencia y Créditos
+
+* **Código fuente:** Licenciado bajo [GNU GPLv3](LICENSE.txt).
+* **Multimedia y Recursos:** Licenciados bajo [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
+* **Desarrollador Principal:** Knoiax.
+
+### Agradecimientos a Terceros
+Este mod integra y ofrece compatibilidad dinámica con elementos de los siguientes proyectos de la comunidad:
+- **Mineclonia** por *Ryvnf y colaboradores*.
+- **Bronze Stuff** por *MiracleNebulae* (Futura integración por lo tanto solamente damos crédito de dependencias planificadas).
+- **Copper Golem** por *nando* y *NO11*(Futura integración por lo tanto solamente damos crédito de dependencias planificadas).
+- **Italian Food** & **MoreFood** por sus respetivos autores comunitarios(Futura integración por lo tanto solamente damos crédito de dependencias planificadas).
