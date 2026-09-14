@@ -1,0 +1,6 @@
+.DS_Store
+Thumbs.db
+.vscode/
+*.sqlite
+*.log
+debug.txt
