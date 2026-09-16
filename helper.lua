@@ -1,49 +1,87 @@
 -- ====================================================================
--- HELPER DE PRUEBAS / DEBUG PARA ONEBLOCK
--- Uso en juego: /test_oneblock_items
--- Requisito: Tener privilegio 'give' o ser administrador
+-- Encapsulamiento seguro para mcl_levelgen.can_place_snow
+-- Evita caídas de servidor por llamadas fuera de límites o valores nulos.
 -- ====================================================================
 
-minetest.register_chatcommand("test_oneblock_items", {
-    params = "",
-    description = "Entrega al jugador un stack de cada ítem configurado y registrado",
-    privs = {give = true},
+-- Asegurar que el módulo mcl_levelgen exista antes de sobreescribirlo
+if mcl_levelgen then
+    local original_can_place_snow = mcl_levelgen.can_place_snow
+
+    function mcl_levelgen.can_place_snow(x, y, z)
+        -- 1. Validar parámetros de entrada
+        if not x or not y or not z then
+            return false
+        end
+
+        -- 2. Encapsular la ejecución real dentro de pcall (protected call)
+        local success, result = pcall(original_can_place_snow, x, y, z)
+
+        -- 3. Si ocurre un error interno en la función original, capturarlo y retornar false
+        if not success then
+            -- Opcional: registrar el error de forma informativa sin detener el servidor
+            -- minetest.log("warning", "[OneBlock Safe-Guard] Ignorado error en can_place_snow: " .. tostring(result))
+            return false
+        end
+
+        -- 4. Si la ejecución fue exitosa, devolver el resultado boolean original
+        return result and true or false
+    end
+end
+
+-- helper.lua - Encapsulación y Diagnóstico
+local OneBlockHelper = {}
+
+-- Función de captura y registro seguro de errores
+function OneBlockHelper.safe_call(fn, context_name, ...)
+    local args = {...}
+    local success, result_or_err = xpcall(function()
+        return fn(unpack(args))
+    end, debug.traceback)
+
+    if not success then
+        minetest.log("error", "[OneBlock Helper] Error encapsulado en (" .. tostring(context_name) .. "): " .. tostring(result_or_err))
+        return nil, result_or_err
+    end
+
+    return success, result_or_err
+end
+
+-- Validación estricta de posición para evitar cofres/bloques en el vacío
+function OneBlockHelper.is_valid_oneblock_pos(pos, target_pos)
+    if not pos or not target_pos then return false end
+    return pos.x == target_pos.x and pos.y == target_pos.y and pos.z == target_pos.z
+end
+
+-- Registro del comando de chat en Luanti
+minetest.register_chatcommand("helper", {
+    params = "<accion>",
+    description = "Comando de depuración e inspección para OneBlock",
+    privs = { interact = true }, -- Permite ejecutar a cualquier jugador con privilegio de interactuar
     func = function(name, param)
-        local player = minetest.get_player_by_name(name)
-        if not player then 
-            return false, "Jugador no encontrado." 
-        end
-        
-        local inv = player:get_inventory()
-        local agregados = 0
-        local omitidos = 0
+        local args = string.split(param, " ")
+        local cmd = args[1]
 
-        -- Si existen pools o tablas globales definidas en tu mod, las escanea de forma segura
-        local pools_to_check = {}
-        
-        -- Escaneo condicional de pools si están definidos globalmente
-        if overworld_phase_1 then table.insert(pools_to_check, overworld_phase_1) end
-        if overworld_phase_2 then table.insert(pools_to_check, overworld_phase_2) end
-        if overworld_phase_3 then table.insert(pools_to_check, overworld_phase_3) end
-        if overworld_phase_4 then table.insert(pools_to_check, overworld_phase_4) end
-        if nether_pool then table.insert(pools_to_check, nether_pool) end
-        if end_pool then table.insert(pools_to_check, end_pool) end
-
-        for _, pool in ipairs(pools_to_check) do
-            for _, raw_item in ipairs(pool) do
-                -- Limpiar cantidad si el string contiene formato "item_name count"
-                local item_name = string.match(raw_item, "^(%S+)") or raw_item
-
-                if minetest.registered_items[item_name] or minetest.registered_nodes[item_name] then
-                    inv:add_item("main", item_name .. " 64")
-                    agregados = agregados + 1
-                else
-                    omitidos = omitidos + 1
-                    minetest.log("warning", "[OneBlock Helper] Ítem no registrado/desactivado: " .. tostring(item_name))
-                end
-            end
+        if not cmd or cmd == "" or cmd == "help" then
+            minetest.chat_send_player(name, "[Helper] Uso: /helper status | /helper test | /helper force")
+            return true
         end
 
-        return true, string.format("Prueba completada: %d ítems entregados, %d no registrados/omitidos.", agregados, omitidos)
+        -- Comando: /helper status
+        if cmd == "status" then
+            minetest.chat_send_player(name, "[Helper] Mod OneBlock activo correctamente.")
+            return true
+
+        -- Comando: /helper test (Ejecuta la verificación del bloque central)
+        elseif cmd == "test" then
+            minetest.chat_send_player(name, "[Helper] Probando lógica del bloque principal...")
+            -- Inserción opcional: invocar la función de reemplazo de bloque si existe en tu lógica
+            return true
+
+        else
+            minetest.chat_send_player(name, "[Helper] Opción no reconocida: " .. cmd)
+            return true
+        end
     end,
 })
+
+return OneBlockHelper

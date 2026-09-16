@@ -45,46 +45,47 @@ local chest_count = storage:get_int("chest_count") or 0
 local nether_island_created = storage:get_string("nether_island_created") == "true"
 local end_island_created = storage:get_string("end_island_created") == "true"
 
--- 2. LISTAS DE BOTÍN PARA COFRES
+-- 2. LISTAS DE BOTÍN PARA COFRES (Validados con PT_todo_el_codigo_mobs_mc.txt)
 local ow_standard_loot = {
-    "mcl_mobs:spawn_egg_mobs_mc_axolotl",
-    "mcl_mobs:spawn_egg_mobs_mc_axolotl",
-    "mcl_mobs:spawn_egg_mobs_mc_axolotl",
-    "mcl_mobs:spawn_egg_mobs_mc_creeper",
-    "mcl_mobs:spawn_egg_mobs_mc_creeper",
-    "mcl_mobs:spawn_egg_mobs_mc_creeper",
-    "mcl_mobs:spawn_egg_mobs_mc_mooshroom 2",
-    "mcl_mobs:spawn_egg_mobs_mc_mooshroom",
-    "mcl_mobs:spawn_egg_mobs_mc_mooshroom",
-    "mcl_mobs:spawn_egg_mobs_mc_dolphin",
-    "mcl_mobs:spawn_egg_mobs_mc_dolphin",
-    "mcl_mobs:spawn_egg_mobs_mc_drowned",
-    "mcl_mobs:spawn_egg_mobs_mc_drowned",
-    "mcl_mobs:spawn_egg_mobs_mc_drowned",
-    "mcl_mobs:spawn_egg_mobs_mc_endermite",
-    "mcl_mobs:spawn_egg_mobs_mc_mooshroom",
-    "mcl_mobs:spawn_egg_mobs_mc_mooshroom",
-    "mcl_mobs:spawn_egg_mobs_mc_mooshroom",
-    "mcl_core:stick", 
-    "mcl_farming:wheat_seeds", 
-    "mcl_farming:carrot", 
-    "mcl_farming:bread",
-    "mcl_farming:potato", 
-    "mcl_core:iron_ingot 2", 
-    "mcl_core:gold_ingot", 
-    "mcl_tridents:trident",
-    "mcl_buckets:bucket_water", 
-    "mcl_buckets:bucket_lava", 
-    "mcl_mobitems:saddle", 
-    "mcl_mobitems:gunpowder 2",
-    "mcl_trees:sapling_birch",
-    "mcl_trees:sapling_dark_oak",
-    "mcl_trees:sapling_dark_oak", 
-    "mcl_bamboo:bamboo",
-    "mcl_trees:sapling_oak", 
-    "mcl_trees:sapling_acacia", 
-    "mcl_farming:beetroot_seeds 5", 
-    "mcl_farming:sweet_berry"
+    -- Huevos de Mobs Pacíficos/Pasivos
+    --"mobs_mc:cow",
+    --"mobs_mc:pig",
+    --"mobs_mc:sheep",
+    --"mobs_mc:chicken",
+    --"mobs_mc:mooshroom",
+    "mobs_mc:villager",
+    --"mobs_mc:axolotl",
+    --"mobs_mc:dolphin",
+    
+    -- Huevos de Mobs Hostiles / Neutrales
+    --"mobs_mc:zombie",
+    --"mobs_mc:skeleton",
+    --"mobs_mc:creeper",
+    --"mobs_mc:spider",
+    --"mobs_mc:enderman"
+
+    -- Objetos varios
+    --"mcl_core:stick", 
+    --"mcl_farming:wheat_seeds", 
+    --"mcl_farming:carrot", 
+    --"mcl_farming:bread",
+    --"mcl_farming:potato", 
+    --"mcl_core:iron_ingot 2", 
+    --"mcl_core:gold_ingot", 
+    --"mcl_tridents:trident",
+    --"mcl_buckets:bucket_water", 
+    --"mcl_buckets:bucket_lava", 
+    --"mcl_mobitems:saddle", 
+    --"mcl_mobitems:gunpowder 2",
+    --"mcl_trees:sapling_birch",
+    --"mcl_trees:sapling_dark_oak",
+    --"mcl_trees:sapling_dark_oak", 
+    --"mcl_bamboo:bamboo",
+    --"mcl_trees:sapling_oak", 
+    --"mcl_trees:sapling_acacia", 
+    --"mcl_farming:beetroot_seeds 5", 
+    --"mcl_farming:sweet_berry"
+    
 }
 
 -- Botín especial / Tesoros (Libros encantados, equipamiento, mapas/marítimos)
@@ -408,6 +409,23 @@ local function populate_chest(pos, dimension)
     end
 end
 
+-- Función auxiliar para obtener botín seguro
+local function get_safe_loot_item(loot_table)
+    local max_attempts = 10
+    for i = 1, max_attempts do
+        local candidate = loot_table[math.random(#loot_table)]
+        -- Extrae únicamente el nombre técnico del ítem (ignorando cantidades)
+        local item_name = candidate:match("(%S+)")
+        
+        -- Comprueba si el ítem / huevo realmente existe registrado en Luanti
+        if minetest.registered_items[item_name] then
+            return candidate
+        end
+    end
+    -- Si tras varios intentos el huevo no existe, entrega un ítem de respaldo seguro
+    return "mcl_core:apple"
+end
+
 -- 6. GENERADOR DE ISLA ONEBLOCK (ACTIVADO SOLO AL ATRAVESAR UN PORTAL)
 -- En lugar de chequear 60 veces por segundo, revisamos la zona cuando el jugador cambia de posición
 minetest.register_globalstep(function(dtime)
@@ -488,7 +506,7 @@ minetest.register_on_dignode(function(pos, oldnode, digger)
 
         -- Generar Cofre cada 30 bloques picados
         local next_block
-        if blocks_mined_overworld % 30 == 0 then
+        if blocks_mined_overworld % 5 == 0 then
             next_block = "mcl_chests:chest"
         else
             local pool = overworld_phase_1
