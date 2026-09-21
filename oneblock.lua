@@ -1,4 +1,6 @@
+local modname = minetest.get_current_modname()
 local OVERWORLD_POS = {x = 0, y = 10, z = 0}
+local IF_PREFIX = mcl_eodp.prefix.italian_food
 
 -- Función para forzar la carga del terreno y situar al jugador de forma totalmente segura
 local function safe_teleport(player)
@@ -47,13 +49,56 @@ local end_island_created = storage:get_string("end_island_created") == "true"
 
 -- 2. LISTAS DE BOTÍN PARA COFRES (Validados con PT_todo_el_codigo_mobs_mc.txt)
 local ow_standard_loot = {
+
+    -- Italian_food
+    IF_PREFIX ..  "basil",
+    IF_PREFIX ..  "bruschetta",
+    IF_PREFIX ..  "cannoli",
+    IF_PREFIX ..  "cheese_rack",
+    IF_PREFIX ..  "coffee", 
+    IF_PREFIX ..  "coffee_roasted_bean",
+    IF_PREFIX ..  "coffee_sack",
+    IF_PREFIX ..  "cone",
+    IF_PREFIX ..  "diamond_tomato",
+    IF_PREFIX ..  "diamond_basil",
+    IF_PREFIX ..  "dough",
+    IF_PREFIX ..  "fazzoletto_raw",
+    IF_PREFIX ..  "gnocco_raw",
+    IF_PREFIX ..  "ice_cream",
+    IF_PREFIX ..  "iron_rolling_pin",
+    IF_PREFIX ..  "lasagna",
+    IF_PREFIX ..  "mozzarella",
+    IF_PREFIX ..  "mushroom_pizza",
+    IF_PREFIX ..  "olive",
+    IF_PREFIX ..  "olive_oil",
+    IF_PREFIX ..  "olivewood",
+    IF_PREFIX ..  "pandoro",
+    IF_PREFIX ..  "panettone",
+    IF_PREFIX ..  "pesto_bruschetta",
+    IF_PREFIX ..  "pesto_sauce",
+    IF_PREFIX ..  "pizza",
+    IF_PREFIX ..  "pizza_cutter_wheel",
+    IF_PREFIX ..  "pork_jowl",
+    IF_PREFIX ..  "raviolo_raw",
+    IF_PREFIX ..  "rolling_pin",
+    IF_PREFIX ..  "sheep_cheese",
+    IF_PREFIX ..  "sheep_milk_bucket",
+    IF_PREFIX ..  "spaghetti",
+    IF_PREFIX ..  "sugar_coffee",
+    IF_PREFIX ..  "sunflowerolio",
+    IF_PREFIX ..  "tiramisu",
+    IF_PREFIX ..  "tomato",
+    IF_PREFIX ..  "tomato_sauce",
+    IF_PREFIX ..  "tomato_sauce_bruschetta",
+
+
     -- Huevos de Mobs Pacíficos/Pasivos
     --"mobs_mc:cow",
     --"mobs_mc:pig",
     --"mobs_mc:sheep",
     --"mobs_mc:chicken",
     --"mobs_mc:mooshroom",
-    "mobs_mc:villager",
+    --"mobs_mc:villager",
     --"mobs_mc:axolotl",
     --"mobs_mc:dolphin",
     
@@ -62,7 +107,7 @@ local ow_standard_loot = {
     --"mobs_mc:skeleton",
     --"mobs_mc:creeper",
     --"mobs_mc:spider",
-    --"mobs_mc:enderman"
+    --"mobs_mc:enderman",
 
     -- Objetos varios
     --"mcl_core:stick", 
@@ -95,6 +140,7 @@ local ow_special_loot = {
     "mcl_tools:pick_diamond", 
     "mcl_armor:chestplate_diamond",
     "mcl_cake:cake",
+    "mobs_mc:ravager",
     "mcl_ocean:heart_of_the_sea", 
     "mcl_sponges:sponge", 
     "mcl_core:emerald 4", 
@@ -109,6 +155,7 @@ local ow_special_loot = {
     "mcl_trees:sapling_jungle",
     "mcl_trees:sapling_spruce", 
     "mcl_trees:sapling_cherry_blossom", 
+    "mobs_mc:illusioner",
 }
 -- COFRES NETHER
 local nether_standard_loot = {
@@ -290,9 +337,6 @@ local hostile_mobs_ow = {
     "mobs_mc:witch",
     "mobs_mc:evoker", 
     "mobs_mc:vindicator", 
-    "mobs_mc:ravager", 
-    "mobs_mc:phantom",
-    "mobs_mc:phantom",
     "mobs_mc:phantom",
     "mobs_mc:slime",
     "mobs_mc:slime",
@@ -300,7 +344,6 @@ local hostile_mobs_ow = {
     "mobs_mc:slime",
     "mobs_mc:slime",
     "mobs_mc:slime",
-    "mobs_mc:illusioner",
     "mobs_mc:villager_zombie",
     "mobs_mc:villager_zombie",
     "mobs_mc:villager_zombie"
@@ -510,9 +553,9 @@ minetest.register_on_dignode(function(pos, oldnode, digger)
             next_block = "mcl_chests:chest"
         else
             local pool = overworld_phase_1
-            if blocks_mined_overworld > 500 then pool = overworld_phase_4
-            elseif blocks_mined_overworld > 250 then pool = overworld_phase_3
-            elseif blocks_mined_overworld > 100 then pool = overworld_phase_2 end
+            if blocks_mined_overworld > 800 then pool = overworld_phase_4
+            elseif blocks_mined_overworld > 400 then pool = overworld_phase_3
+            elseif blocks_mined_overworld > 200 then pool = overworld_phase_2 end
             next_block = pool[math.random(#pool)]
         end
 
