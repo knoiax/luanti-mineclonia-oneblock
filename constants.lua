@@ -4,10 +4,11 @@ mcl_eodp = {} -- Namespace global exclusivo para tu mod
 
 -- Tabla centralizada de prefijos accesible desde cualquier lugar
 mcl_eodp.prefix = {
-    italian_food = modname .. ":eodp_it_f_",
-    morefood     = modname .. ":eodp_m_mf_",
-    bronze_stuff = modname .. ":eodp_m_b_s_",
-    copper_golem = modname .. ":eodp_c_g_",
+    de_papi      = modname .. ":",
+    italian_food = modname .. ":it_f_",
+    morefood     = modname .. ":m_mf_",
+    bronze_stuff = modname .. ":m_b_s_",
+    copper_golem = modname .. ":c_g_",
 }
 
 -- Mapeo para créditos

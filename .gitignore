@@ -1,6 +1,22 @@
+# Archivos del SO
 .DS_Store
 Thumbs.db
+
+# Configuración del editor
 .vscode/
+
+# Exportación para Gemini Notebook
+exportables/
+
+# Bases de datos y logs de ejecuciones/pruebas de Luanti
 *.sqlite
+*.sqlite-shm
+*.sqlite-wal
 *.log
 debug.txt
+world/
+
+# Archivos temporales
+*.bak
+*.tmp
+*.swp

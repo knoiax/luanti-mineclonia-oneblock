@@ -196,23 +196,25 @@ core.register_craft({
     recipe = {
         {"","mcl_cocoas:cocoa_beans", ""},
         {"", PREFIX ..  "dough", ""},
-        {"", "mcl_throwing:egg", ""},
+        {"", "mcl_throwing:egg", ""},z
     },
 })
+-- RECETAS DE CRAFTEO DE TOMATE Y ALBAHACA DE DIAMANTE
 core.register_craft({
-    output = PREFIX ..  "diamond_tomato",
+    output = PREFIX .. "diamond_tomato",
     recipe = {
-        {"mcl_core:diamondblock","mcl_core:diamondblock", "mcl_core:diamondblock"},
-        {"mcl_core:diamondblock", PREFIX ..  "tomato", "mcl_core:diamondblock"},
-        {"mcl_core:diamondblock", "mcl_core:diamondblock", "mcl_core:diamondblock"},
+        {"mcl_core:diamond", "", "mcl_core:diamond"},
+        {"", PREFIX .. "tomato",  ""},
+        {"mcl_core:diamond", "", "mcl_core:diamond"},
     },
 })
+
 core.register_craft({
-    output = PREFIX ..  "diamond_basil",
+    output = PREFIX .. "diamond_basil",
     recipe = {
-        {"mcl_core:diamondblock","mcl_core:diamondblock", "mcl_core:diamondblock"},
-        {"mcl_core:diamondblock", PREFIX ..  "basil", "mcl_core:diamondblock"},
-        {"mcl_core:diamondblock", "mcl_core:diamondblock", "mcl_core:diamondblock"},
+        {"", "mcl_core:diamond", ""},
+        {"mcl_core:diamond", PREFIX .. "basil",   "mcl_core:diamond"},
+        {"", "mcl_core:diamond", ""},
     },
 })
 
@@ -285,21 +287,4 @@ core.register_craft({
 		{PREFIX ..  "olivewood", PREFIX ..  "olivewood", ""},
 		{PREFIX ..  "olivewood", PREFIX ..  "olivewood", PREFIX ..  "olivewood"},
 	}
-})
-
-core.register_craft({
-    output = PREFIX ..  "diamond_tomato",
-    recipe = {
-        {"mcl_core:diamondblock","mcl_core:diamondblock", "mcl_core:diamondblock"},
-        {"mcl_core:diamondblock", PREFIX ..  "tomato", "mcl_core:diamondblock"},
-        {"mcl_core:diamondblock", "mcl_core:diamondblock", "mcl_core:diamondblock"},
-    },
-})
-core.register_craft({
-    output = PREFIX ..  "diamond_basil",
-    recipe = {
-        {"mcl_core:diamondblock","mcl_core:diamondblock", "mcl_core:diamondblock"},
-        {"mcl_core:diamondblock", PREFIX ..  "basil", "mcl_core:diamondblock"},
-        {"mcl_core:diamondblock", "mcl_core:diamondblock", "mcl_core:diamondblock"},
-    },
 })

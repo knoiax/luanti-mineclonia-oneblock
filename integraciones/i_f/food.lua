@@ -22,7 +22,7 @@ end
 -- REGISTRO ÚNICO Y CONSOLIDADO DE ALIMENTOS
 register_food_item(PREFIX .. "basil", S("Basil"), modname .. "_basil.png", 3, 4)
 register_food_item(PREFIX .. "bruschetta", S("Bruschetta"), modname .. "_bruschetta.png", 20, 18)
-register_food_item(PREFIX .. "canoli", S("Cannoli"), modname .. "_canoli.png", 20, 18)
+register_food_item(PREFIX .. "cannoli", S("Cannoli"), modname .. "_cannoli.png", 20, 18)
 register_food_item(PREFIX .. "coffee_roasted_bean", S("Roasted Coffee Bean"), modname .. "_roasted_coffee_bean.png", 3, 4)
 register_food_item(PREFIX .. "cone", S("Ice Cream Cone"), modname .. "_cone.png", 4, 6)
 register_food_item(PREFIX .. "dough", S("Dough"), modname .. "_dough.png", 10, 10)
@@ -50,3 +50,33 @@ register_food_item(PREFIX .. "tiramisu", S("Tiramisu"), modname .. "_tiramisu.pn
 register_food_item(PREFIX .. "tomato_sauce_bruschetta", S("Tomato Sauce Bruschetta"), modname .. "_tosauce_bruschetta.png", 24, 20)
 register_food_item(PREFIX .. "tomato", S("Tomato"), modname .. "_tomato.png", 8.5, 9)
 register_food_item(PREFIX .. "tomato_sauce", S("Tomato Sauce"), modname .. "_tomato_sauce.png", 7.5, 8)
+
+
+-- REGISTRO DE ALIMENTOS ESPECIALES DE DIAMANTE (ESTÁNDAR MINECLONIA)
+minetest.register_craftitem(PREFIX .. "diamond_tomato", {
+    description = S("Diamond Tomato"),
+    _doc_items_longdesc = S("A legendary tomato infused with diamond power. Grants regeneration and resistance."),
+    inventory_image = modname .. "_diamond_tomato.png",
+    groups = { food = 2, eatable = 20, can_eat_when_full = 1, rarity = 2 },
+    _mcl_saturation = 20.0,
+    _mcl_eat_effect = function(_, placer)
+        if placer and placer:is_player() and mcl_potions then
+            mcl_potions.give_effect_by_level("regeneration", placer, 2, 30)
+            mcl_potions.give_effect_by_level("resistance", placer, 1, 60)
+        end
+    end,
+})
+
+minetest.register_craftitem(PREFIX .. "diamond_basil", {
+    description = S("Diamond Basil"),
+    _doc_items_longdesc = S("A rare basil leaf infused with diamond power. Grants haste and speed."),
+    inventory_image = modname .. "_diamond_basil.png",
+    groups = { food = 2, eatable = 10, can_eat_when_full = 1, rarity = 2 },
+    _mcl_saturation = 10.0,
+    _mcl_eat_effect = function(_, placer)
+        if placer and placer:is_player() and mcl_potions then
+            mcl_potions.give_effect_by_level("haste", placer, 2, 45)
+            mcl_potions.give_effect_by_level("swiftness", placer, 2, 45)
+        end
+    end,
+})

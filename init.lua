@@ -15,6 +15,9 @@ dofile(modpath ..  "/helper.lua")
 
 -- Cargar lógica principal de OneBlock
 dofile(modpath .. "/oneblock.lua")
+dofile(modpath .. "/lemon_tree.lua")
+dofile(modpath .. "/eodp_food.lua")
+dofile(modpath .. "/eodp_crafting.lua")
 
 -- Módulo de Integración Italian Food (i_f)
 dofile(modpath .. "/integraciones/i_f/crafting.lua")
