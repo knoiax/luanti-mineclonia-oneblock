@@ -26,6 +26,7 @@ dofile(modpath .. "/oneblock.lua")
 dofile(modpath .. "/lemon_tree.lua")
 dofile(modpath .. "/eodp_food.lua")
 dofile(modpath .. "/eodp_crafting.lua")
+dofile(modpath .. "/villager_trades.lua")
 
 -- Integracion de modulos de terceros
 -- 3. Tercero: Cargar el registro de ítems de cada integración
