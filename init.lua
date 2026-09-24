@@ -13,12 +13,6 @@ dofile(modpath .. "/mod_tables.lua")
 -- Cargar módulo Helper de funciones auxiliares para pruebas y depuración en vivo
 dofile(modpath ..  "/helper.lua")
 
--- Cargar lógica principal de OneBlock
-dofile(modpath .. "/oneblock.lua")
-dofile(modpath .. "/lemon_tree.lua")
-dofile(modpath .. "/eodp_food.lua")
-dofile(modpath .. "/eodp_crafting.lua")
-
 -- Módulo de Integración Italian Food (i_f)
 dofile(modpath .. "/integraciones/i_f/crafting.lua")
 dofile(modpath .. "/integraciones/i_f/food.lua")
@@ -26,6 +20,12 @@ dofile(modpath .. "/integraciones/i_f/drinks.lua")
 dofile(modpath .. "/integraciones/i_f/nodes.lua")
 dofile(modpath .. "/integraciones/i_f/tools.lua")
 dofile(modpath .. "/integraciones/i_f/olive_tree.lua")
+
+-- Cargar lógica principal de OneBlock
+dofile(modpath .. "/oneblock.lua")
+dofile(modpath .. "/lemon_tree.lua")
+dofile(modpath .. "/eodp_food.lua")
+dofile(modpath .. "/eodp_crafting.lua")
 
 -- Integracion de modulos de terceros
 -- 3. Tercero: Cargar el registro de ítems de cada integración

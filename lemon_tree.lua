@@ -8,9 +8,17 @@ local Lemon_tree = {}
 
 function Lemon_tree.generate(pos)
     local i = math.random(1, 4)
-    local path = modpath .. "/schematics/eodp_Lemon_tree_" .. i .. ".mts"
+    local path = modpath .. "/schematics/eodp_lemon_tree_" .. i .. ".mts"
     minetest.set_node(pos, { name = "air" })
-    return minetest.place_schematic(pos, path, "random", nil, true)
+    
+    -- Ajustamos el origen (pos1) restando la distancia hacia la esquina
+    -- Si tu tronco estaba a 3 bloques en X y 3 bloques en Z desde pos1:
+    local offset_pos = {
+        x = pos.x - 3,
+        y = pos.y,     -- Mantener la altura del suelo
+        z = pos.z - 3
+    }
+    return minetest.place_schematic(offset_pos, path, "random", nil, true)
 end
 
 -- 1. Madera de limonero (Planks)

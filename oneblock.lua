@@ -1,6 +1,7 @@
 local modname = minetest.get_current_modname()
 local OVERWORLD_POS = {x = 0, y = 10, z = 0}
 local IF_PREFIX = mcl_eodp.prefix.italian_food
+local PREFIX = mcl_eodp.prefix.de_papi
 
 -- Función para forzar la carga del terreno y situar al jugador de forma totalmente segura
 local function safe_teleport(player)
@@ -90,6 +91,10 @@ local ow_standard_loot = {
     IF_PREFIX ..  "tomato",
     IF_PREFIX ..  "tomato_sauce",
     IF_PREFIX ..  "tomato_sauce_bruschetta",
+    PREFIX .. "lemon",
+    PREFIX .. "lemonsapling",
+    PREFIX .. "lemonade 4",
+
 
 
     -- Huevos de Mobs Pacíficos/Pasivos
@@ -141,7 +146,6 @@ local ow_special_loot = {
     "mcl_armor:chestplate_diamond",
     "mcl_cake:cake",
     "mobs_mc:ravager",
-    "mcl_ocean:heart_of_the_sea", 
     "mcl_sponges:sponge", 
     "mcl_core:emerald 4", 
     "mcl_core:diamond 2",
@@ -174,7 +178,8 @@ local nether_special_loot = {
     "mcl_armor:chestplate_gold", 
     "mcl_core:apple_gold", 
     "mcl_potions:fire_resistance", 
-    "mcl_potions:invisibility"
+    "mcl_potions:invisibility",
+    "mcl_potions:night_vision",
 }
 
 -- COFRES END

@@ -130,22 +130,7 @@ core.register_craft({
         {"", "", ""},
     },
 })
-core.register_craft({
-	type = "cooking",
-	output = PREFIX ..  "mozzarella",                                 
-	recipe = "mcl_mobitems:milk_bucket",
-	replacements = {
-		{"mcl_mobitems:milk_bucket", "mcl_buckets:bucket_empty"},
-	},
-})
-core.register_craft({
-	type = "cooking",
-	output = PREFIX ..  "sheep_cheese",                                
-	recipe = PREFIX ..  "sheep_milk_bucket",
-	replacements = {
-		{"mcl_mobitems:milk_bucket", "mcl_buckets:bucket_empty"},
-	},
-})
+
 core.register_craft({
 	type = "cooking",
 	output = PREFIX ..  "coffee_roasted_bean",                                
