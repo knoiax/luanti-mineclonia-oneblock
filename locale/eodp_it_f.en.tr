@@ -1,48 +1,81 @@
 # textdomain: eodp_it_f
-Pizza=Pizza
-Mushroom Pizza=Mushroom Pizza
-Lasagna=Lasagna
-Tomato Spaghetti=Tomato Spaghetti
-Dough=Dough
-Raw Spaghetti=Raw Spaghetti
-Raw Raviolo=Raw Raviolo
-Raw Gnocco=Raw Gnocco
-Raw Fazzoletto=Raw Fazzoletto
-Bruschetta=Bruschetta
-Tomato Sauce Bruschetta=Tomato Sauce Bruschetta
-Pesto Sauce Bruschetta=Pesto Sauce Bruschetta
-Cannoli=Cannoli
-Mozzarella=Mozzarella
-Sheep Milk Bucket=Sheep Milk Bucket
-Sheep Cheese=Sheep Cheese
-Tomato=Tomato
+
+# --- Foods & Drinks ---
 Basil=Basil
-Olives=Olives
-Olive Oil=Olive Oil
-Tomato Sauce=Tomato Sauce
-Pesto Sauce=Pesto Sauce
-Tiramisu=Tiramisu
+Bruschetta=Bruschetta
+Cannoli=Cannoli
 Chocolate Ice Cream=Chocolate Ice Cream
-Ice Cream Cone=Ice Cream Cone
-Panettone=Panettone
-Pandoro=Pandoro
 Coffee=Coffee
-Sugar Coffee=Sugar Coffee
-Roasted Coffee Bean=Roasted Coffee Bean
-Coffee Sack=Coffee Sack
-Sunflower Oil=Sunflower Oil
+Coffee Bean=Coffee Bean
+Dough=Dough
+Ice Cream Cone=Ice Cream Cone
+Lasagna=Lasagna
+Mozzarella=Mozzarella
+Mushroom Pizza=Mushroom Pizza
+Olive Oil=Olive Oil
+Olives=Olives
+Pandoro=Pandoro
+Panettone=Panettone
+Pesto Sauce=Pesto Sauce
+Pesto Sauce Bruschetta=Pesto Sauce Bruschetta
+Pizza=Pizza
 Pork Jowl=Pork Jowl
-Rolling Pin=Rolling Pin
+Raw Fazzoletto=Raw Fazzoletto
+Raw Gnocco=Raw Gnocco
+Raw Raviolo=Raw Raviolo
+Raw Spaghetti=Raw Spaghetti
+Roasted Coffee Bean=Roasted Coffee Bean
+Sheep Cheese=Sheep Cheese
+Sheep Milk Bucket=Sheep Milk Bucket
+Sugar Coffee=Sugar Coffee
+Sunflower Oil=Sunflower Oil
+Tiramisu=Tiramisu
+Tomato=Tomato
+Tomato Sauce=Tomato Sauce
+Tomato Sauce Bruschetta=Tomato Sauce Bruschetta
+Tomato Spaghetti=Tomato Spaghetti
+
+# --- Blocks & Wood ---
+Cheese Rack=Cheese Rack
+Coffee Sack=Coffee Sack
+Olive Sapling=Olive Sapling
+Olive Tree Leaves=Olive Tree Leaves
+Olive Tree Log=Olive Tree Log
+Olive Wood Planks=Olive Wood Planks
+Stripped Olive Tree Log=Stripped Olive Tree Log
+
+# --- Plants & Crops ---
+Basil Seeds=Basil Seeds
+Coffee Bush (Stage @1)=Coffee Bush (Stage @1)
+Mature Basil Plant=Mature Basil Plant
+Mature Tomato Plant=Mature Tomato Plant
+Premature Basil Plant=Premature Basil Plant
+Premature Basil Plant (Stage @1)=Premature Basil Plant (Stage @1)
+Premature Tomato Plant=Premature Tomato Plant
+Premature Tomato Plant (Stage @1)=Premature Tomato Plant (Stage @1)
+Tomato Seeds=Tomato Seeds
+
+# --- Tools & Items ---
 Iron Rolling Pin=Iron Rolling Pin
 Pizza Cutter Wheel=Pizza Cutter Wheel
-Cheese Rack=Cheese Rack
-Olive Wood Planks=Olive Wood Planks
-Olive Tree Log=Olive Tree Log
-The trunk of an olive tree.=The trunk of an olive tree.
-Stripped Olive Tree Log=Stripped Olive Tree Log
-The stripped trunk of an olive tree.=The stripped trunk of an olive tree.
-Olive Tree Leaves=Olive Tree Leaves
-Olive Tree leaves are grown from olive trees.=Olive Tree leaves are grown from olive trees.
-Olive Sapling=Olive Sapling
+Rolling Pin=Rolling Pin
+
+# --- Doc & Descriptions ---
+Grows into a basil plant.=Grows into a basil plant.
+Grows into a tomato plant.=Grows into a tomato plant.
 Grows into an olive tree under the right conditions.=Grows into an olive tree under the right conditions.
+Grows on farmland=Grows on farmland
+Mature basil plants are ready to be harvested for basil and basil seeds.=Mature basil plants are ready to be harvested for basil and basil seeds.
+Mature tomato plants are ready to be harvested for tomatoes and tomato seeds.=Mature tomato plants are ready to be harvested for tomatoes and tomato seeds.
+Olive Tree leaves are grown from olive trees.=Olive Tree leaves are grown from olive trees.
+Place the basil seeds on farmland (created with a hoe) to plant a basil plant.=Place the basil seeds on farmland (created with a hoe) to plant a basil plant.
+Place the tomato seeds on farmland (created with a hoe) to plant a tomato plant.=Place the tomato seeds on farmland (created with a hoe) to plant a tomato plant.
+Premature basil plants grow on farmland under sunlight through 7 stages.=Premature basil plants grow on farmland under sunlight through 7 stages.
+Premature tomato plants grow on farmland under sunlight through 7 stages.=Premature tomato plants grow on farmland under sunlight through 7 stages.
+The stripped trunk of an olive tree.=The stripped trunk of an olive tree.
+The trunk of an olive tree.=The trunk of an olive tree.
+They do not grow any further.=They do not grow any further.
+They grow faster on hydrated farmland.=They grow faster on hydrated farmland.
+They grow in sunlight and grow faster on hydrated farmland.=They grow in sunlight and grow faster on hydrated farmland.
+They can be harvested at any time but yield profit only when mature.=They can be harvested at any time but yield profit only when mature.
 This is a food item which can be eaten.=This is a food item which can be eaten.

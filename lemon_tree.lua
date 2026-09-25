@@ -67,7 +67,7 @@ minetest.register_node(PREFIX .. "lemonleaves", {
     tiles = { modname .. "_lemon_leaves.png" },
     paramtype = "light",
     is_ground_content = false,
-    groups = { snappy = 3, leaves = 1, flammable = 2, deco_block = 1 },
+    groups = { snappy = 3, leaves = 1, flammable = 2, deco_block = 1, compostability = 35},
     sounds = mcl_sounds.node_sound_leaves_defaults(),
     drop = {
         max_items = 1,
@@ -94,7 +94,7 @@ minetest.register_node(PREFIX .. "lemonsapling", {
         type = "fixed",
         fixed = {-4/16, -0.5, -4/16, 4/16, 0.5, 4/16},
     },
-    groups = { snappy = 3, sapling = 1, dig_immediate = 3, plant = 1, attached_node = 1, deco_block = 1 },
+    groups = { snappy = 3, sapling = 1, dig_immediate = 3, plant = 1, attached_node = 1, deco_block = 1, compostability = 35 },
     sounds = mcl_sounds.node_sound_leaves_defaults(),
     
     -- Integración Nativa con Polvo de Hueso (Mineclonia)

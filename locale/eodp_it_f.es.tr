@@ -1,48 +1,81 @@
 # textdomain: eodp_it_f
-Pizza=Pizza
-Mushroom Pizza=Pizza de Champiñones
-Lasagna=Lasaña
-Tomato Spaghetti=Espagueti con Tomate
-Dough=Masa
-Raw Spaghetti=Espagueti Crudo
-Raw Raviolo=Ravioli Crudo
-Raw Gnocco=Ñoqui Crudo
-Raw Fazzoletto=Fazzoletto Crudo
-Bruschetta=Bruschetta
-Tomato Sauce Bruschetta=Bruschetta con Salsa de Tomate
-Pesto Sauce Bruschetta=Bruschetta con Salsa Pesto
-Cannoli=Cannoli
-Mozzarella=Queso Mozzarella
-Sheep Milk Bucket=Balde de Leche de Oveja
-Sheep Cheese=Queso de Oveja
-Tomato=Tomate
+
+# --- Alimentos y Bebidas (Foods & Drinks) ---
 Basil=Albahaca
-Olives=Aceitunas
-Olive Oil=Aceite de Oliva
-Tomato Sauce=Salsa de Tomate
-Pesto Sauce=Salsa Pesto
-Tiramisu=Tiramisú
+Bruschetta=Bruschetta
+Cannoli=Cannoli
 Chocolate Ice Cream=Helado de Chocolate
-Ice Cream Cone=Cono de Helado
-Panettone=Panetón
-Pandoro=Pandoro
 Coffee=Café
-Sugar Coffee=Café con Azúcar
-Roasted Coffee Bean=Grano de Café Tostado
-Coffee Sack=Saco de Café
-Sunflower Oil=Aceite de Girasol
+Coffee Bean=Grano de Café
+Dough=Masa
+Ice Cream Cone=Cono de Helado
+Lasagna=Lasaña
+Mozzarella=Queso Mozzarella
+Mushroom Pizza=Pizza de Champiñones
+Olive Oil=Aceite de Oliva
+Olives=Aceitunas
+Pandoro=Pandoro
+Panettone=Panetón
+Pesto Sauce=Salsa Pesto
+Pesto Sauce Bruschetta=Bruschetta con Salsa Pesto
+Pizza=Pizza
 Pork Jowl=Papada de Cerdo
-Rolling Pin=Uslero / Rodillo de Madera
+Raw Fazzoletto=Fazzoletto Crudo
+Raw Gnocco=Ñoqui Crudo
+Raw Raviolo=Ravioli Crudo
+Raw Spaghetti=Espagueti Crudo
+Roasted Coffee Bean=Grano de Café Tostado
+Sheep Cheese=Queso de Oveja
+Sheep Milk Bucket=Balde de Leche de Oveja
+Sugar Coffee=Café con Azúcar
+Sunflower Oil=Aceite de Girasol
+Tiramisu=Tiramisú
+Tomato=Tomate
+Tomato Sauce=Salsa de Tomate
+Tomato Sauce Bruschetta=Bruschetta con Salsa de Tomate
+Tomato Spaghetti=Espagueti con Tomate
+
+# --- Bloques, Nodos y Madera (Blocks & Wood) ---
+Cheese Rack=Quesera
+Coffee Sack=Saco de Café
+Olive Sapling=Brote de Olivo
+Olive Tree Leaves=Hojas de Olivo
+Olive Tree Log=Tronco de Olivo
+Olive Wood Planks=Tablas de Madera de Olivo
+Stripped Olive Tree Log=Tronco de Olivo Descortezado
+
+# --- Plantas y Cultivos (Plants & Crops) ---
+Basil Seeds=Semillas de Albahaca
+Coffee Bush (Stage @1)=Arbusto de Café (Etapa @1)
+Mature Basil Plant=Planta de Albahaca Madura
+Mature Tomato Plant=Planta de Tomate Madura
+Premature Basil Plant=Planta de Albahaca Inmadura
+Premature Basil Plant (Stage @1)=Planta de Albahaca Inmadura (Etapa @1)
+Premature Tomato Plant=Planta de Tomate Inmadura
+Premature Tomato Plant (Stage @1)=Planta de Tomate Inmadura (Etapa @1)
+Tomato Seeds=Semillas de Tomate
+
+# --- Herramientas e Útiles (Tools & Items) ---
 Iron Rolling Pin=Rodillo de Hierro
 Pizza Cutter Wheel=Cortador de Pizza
-Cheese Rack=Quesera
-Olive Wood Planks=Tablas de Madera de Olivo
-Olive Tree Log=Tronco de Olivo
-The trunk of an olive tree.=El tronco de un árbol de olivo.
-Stripped Olive Tree Log=Tronco de Olivo Descortezado
-The stripped trunk of an olive tree.=El tronco descortezado de un árbol de olivo.
-Olive Tree Leaves=Hojas de Olivo
-Olive Tree leaves are grown from olive trees.=Hojas provenientes del árbol de olivo.
-Olive Sapling=Brote de Olivo
+Rolling Pin=Uslero / Rodillo de Madera
+
+# --- Descripciones de Documentación (Doc & Descriptions) ---
+Grows into a basil plant.=Crece y se convierte en una planta de albahaca.
+Grows into a tomato plant.=Crece y se convierte en una planta de tomate.
 Grows into an olive tree under the right conditions.=Crece y se convierte en un árbol de olivo bajo las condiciones adecuadas.
+Grows on farmland=Crece en tierra de cultivo
+Mature basil plants are ready to be harvested for basil and basil seeds.=Las plantas de albahaca maduras están listas para ser cosechadas por albahaca y semillas.
+Mature tomato plants are ready to be harvested for tomatoes and tomato seeds.=Las plantas de tomate maduras están listas para ser cosechadas por tomates y semillas.
+Olive Tree leaves are grown from olive trees.=Hojas provenientes del árbol de olivo.
+Place the basil seeds on farmland (created with a hoe) to plant a basil plant.=Coloca las semillas de albahaca en tierra de cultivo (creada con una azada) para plantar albahaca.
+Place the tomato seeds on farmland (created with a hoe) to plant a tomato plant.=Coloca las semillas de tomate en tierra de cultivo (creada con una azada) para plantar tomates.
+Premature basil plants grow on farmland under sunlight through 7 stages.=Las plantas de albahaca inmaduras crecen en tierra de cultivo bajo la luz del sol a través de 7 etapas.
+Premature tomato plants grow on farmland under sunlight through 7 stages.=Las plantas de tomate inmaduras crecen en tierra de cultivo bajo la luz del sol a través de 7 etapas.
+The stripped trunk of an olive tree.=El tronco descortezado de un árbol de olivo.
+The trunk of an olive tree.=El tronco de un árbol de olivo.
+They do not grow any further.=Ya no crecen más.
+They grow faster on hydrated farmland.=Crecen más rápido en tierra de cultivo hidratada.
+They grow in sunlight and grow faster on hydrated farmland.=Crecen con la luz del sol y más rápido en tierra de cultivo hidratada.
+They can be harvested at any time but yield profit only when mature.=Pueden ser cosechadas en cualquier momento pero solo dan beneficio al estar maduras.
 This is a food item which can be eaten.=Este es un alimento que se puede comer.

@@ -20,6 +20,8 @@ dofile(modpath .. "/integraciones/i_f/drinks.lua")
 dofile(modpath .. "/integraciones/i_f/nodes.lua")
 dofile(modpath .. "/integraciones/i_f/tools.lua")
 dofile(modpath .. "/integraciones/i_f/olive_tree.lua")
+dofile(modpath .. "/integraciones/i_f/crops.lua")
+
 
 -- Cargar lógica principal de OneBlock
 dofile(modpath .. "/oneblock.lua")
@@ -27,6 +29,7 @@ dofile(modpath .. "/lemon_tree.lua")
 dofile(modpath .. "/eodp_food.lua")
 dofile(modpath .. "/eodp_crafting.lua")
 dofile(modpath .. "/villager_trades.lua")
+dofile(modpath .. "/wandering_trader_trades.lua")
 
 -- Integracion de modulos de terceros
 -- 3. Tercero: Cargar el registro de ítems de cada integración

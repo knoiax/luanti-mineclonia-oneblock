@@ -1,4 +1,3 @@
--- === ARCHIVO: ./villager_trades.lua ===
 local PREFIX = mcl_eodp.prefix.de_papi
 local IF_PREFIX = mcl_eodp.prefix.italian_food
 

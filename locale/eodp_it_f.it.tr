@@ -1,48 +1,81 @@
 # textdomain: eodp_it_f
-Pizza=Pizza
-Mushroom Pizza=Pizza ai Funghi
-Lasagna=Lasagne
-Tomato Spaghetti=Spaghetti al Pomodoro
-Dough=Impasto
-Raw Spaghetti=Spaghetti Crudi
-Raw Raviolo=Raviolo Crudo
-Raw Gnocco=Gnocco Crudo
-Raw Fazzoletto=Fazzoletto Crudo
-Bruschetta=Bruschetta
-Tomato Sauce Bruschetta=Bruschetta al Pomodoro
-Pesto Sauce Bruschetta=Bruschetta al Pesto
-Cannoli=Cannoli
-Mozzarella=Mozzarella
-Sheep Milk Bucket=Secchio di Latte di Pecora
-Sheep Cheese=Pecorino
-Tomato=Pomodoro
+
+# --- Cibi e Bevande (Foods & Drinks) ---
 Basil=Basilico
-Olives=Olive
-Olive Oil=Olio d'Oliva
-Tomato Sauce=Salsa di Pomodoro
-Pesto Sauce=Salsa al Pesto
-Tiramisu=Tiramisù
+Bruschetta=Bruschetta
+Cannoli=Cannoli
 Chocolate Ice Cream=Gelato al Cioccolato
-Ice Cream Cone=Cono Gelato
-Panettone=Panettone
-Pandoro=Pandoro
 Coffee=Caffè
-Sugar Coffee=Caffè Zuccherato
-Roasted Coffee Bean=Chicco di Caffè Tostato
-Coffee Sack=Sacco di Caffè
-Sunflower Oil=Olio di Girasole
+Coffee Bean=Chicco di Caffè
+Dough=Impasto
+Ice Cream Cone=Cono Gelato
+Lasagna=Lasagne
+Mozzarella=Mozzarella
+Mushroom Pizza=Pizza ai Funghi
+Olive Oil=Olio d'Oliva
+Olives=Olive
+Pandoro=Pandoro
+Panettone=Panettone
+Pesto Sauce=Salsa al Pesto
+Pesto Sauce Bruschetta=Bruschetta al Pesto
+Pizza=Pizza
 Pork Jowl=Guanciale
-Rolling Pin=Matterello
+Raw Fazzoletto=Fazzoletto Crudo
+Raw Gnocco=Gnocco Crudo
+Raw Raviolo=Raviolo Crudo
+Raw Spaghetti=Spaghetti Crudi
+Roasted Coffee Bean=Chicco di Caffè Tostato
+Sheep Cheese=Pecorino
+Sheep Milk Bucket=Secchio di Latte di Pecora
+Sugar Coffee=Caffè Zuccherato
+Sunflower Oil=Olio di Girasole
+Tiramisu=Tiramisù
+Tomato=Pomodoro
+Tomato Sauce=Salsa di Pomodoro
+Tomato Sauce Bruschetta=Bruschetta al Pomodoro
+Tomato Spaghetti=Spaghetti al Pomodoro
+
+# --- Blocchi, Nodi e Legno (Blocks & Wood) ---
+Cheese Rack=Scalera per Formaggi
+Coffee Sack=Sacco di Caffè
+Olive Sapling=Arbustello d'Olivo
+Olive Tree Leaves=Foglie d me
+Olive Tree Log=Tronco d'Olivo
+Olive Wood Planks=Assi di Legno d'Olivo
+Stripped Olive Tree Log=Tronco d'Olivo Scortecciato
+
+# --- Piante e Colture (Plants & Crops) ---
+Basil Seeds=Semi di Basilico
+Coffee Bush (Stage @1)=Pianta di Caffè (Stadio @1)
+Mature Basil Plant=Pianta di Basilico Matura
+Mature Tomato Plant=Pianta di Pomodoro Matura
+Premature Basil Plant=Pianta di Basilico Immatura
+Premature Basil Plant (Stage @1)=Pianta di Basilico Immatura (Stadio @1)
+Premature Tomato Plant=Pianta di Pomodoro Immatura
+Premature Tomato Plant (Stage @1)=Pianta di Pomodoro Immatura (Stadio @1)
+Tomato Seeds=Semi di Pomodoro
+
+# --- Utensili e Strumenti (Tools & Items) ---
 Iron Rolling Pin=Matterello di Ferro
 Pizza Cutter Wheel=Rotella Tagliapizza
-Cheese Rack=Scalera per Formaggi
-Olive Wood Planks=Assi di Legno d'Olivo
-Olive Tree Log=Tronco d'Olivo
-The trunk of an olive tree.=Il tronco di un albero d'olivo.
-Stripped Olive Tree Log=Tronco d'Olivo Scortecciato
-The stripped trunk of an olive tree.=Il tronco scortecciato di un albero d'olivo.
-Olive Tree Leaves=Foglie d'Olivo
-Olive Tree leaves are grown from olive trees.=Foglie cresciute dagli alberi d'olivo.
-Olive Sapling=Arbustello d'Olivo
+Rolling Pin=Matterello
+
+# --- Descrizioni e Documentazione (Doc & Descriptions) ---
+Grows into a basil plant.=Cresce in una pianta di basilico.
+Grows into a tomato plant.=Cresce in una pianta di pomodoro.
 Grows into an olive tree under the right conditions.=Cresce in un albero d'olivo nelle giuste condizioni.
+Grows on farmland=Cresce su terreno agricolo
+Mature basil plants are ready to be harvested for basil and basil seeds.=Le piante di basilico mature sono pronte per essere raccolte per basilico e semi.
+Mature tomato plants are ready to be harvested for tomatoes and tomato seeds.=Le piante di pomodoro mature sono pronte per essere raccolte per pomodori e semi.
+Olive Tree leaves are grown from olive trees.=Foglie cresciute dagli alberi d'olivo.
+Place the basil seeds on farmland (created with a hoe) to plant a basil plant.=Metti i semi di basilico sul terreno agricolo (creato con una zappa) per piantare il basilico.
+Place the tomato seeds on farmland (created with a hoe) to plant a tomato plant.=Metti i semi di pomodoro sul terreno agricolo (creato con una zappa) per piantare i pomodori.
+Premature basil plants grow on farmland under sunlight through 7 stages.=Le piante di basilico immature crescono sul terreno agricolo alla luce del sole attraverso 7 stadi.
+Premature tomato plants grow on farmland under sunlight through 7 stages.=Le piante di pomodoro immature crescono sul terreno agricolo alla luce del sole attraverso 7 stadi.
+The stripped trunk of an olive tree.=Il tronco scortecciato di un albero d'olivo.
+The trunk of an olive tree.=Il tronco di un albero d'olivo.
+They do not grow any further.=Non crescono ulteriormente.
+They grow faster on hydrated farmland.=Crescono più velocemente sul terreno agricolo idratato.
+They grow in sunlight and grow faster on hydrated farmland.=Crescono alla luce del sole e più velocemente sul terreno agricolo idratato.
+They can be harvested at any time but yield profit only when mature.=Possono essere raccolte in qualsiasi momento ma danno profitto solo quando mature.
 This is a food item which can be eaten.=Questo è un alimento che può essere mangiato.

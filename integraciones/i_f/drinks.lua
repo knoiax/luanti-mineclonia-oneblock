@@ -29,25 +29,18 @@ local function register_bucket_item(name, description, saturation, eat_value, ef
     })
 end
 
-
 -- =================================================================
 -- ALIMENTOS Y BEBIDAS EMBOTELLADAS (Retornan botella vacía)
 -- =================================================================
 
 -- Café
 register_bottled_item("coffee", "Coffee", 2.4, 8, function(_, player)
-    if player and player:is_player() and mcl_potions then
-		-- Opcional: Otorgar un breve efecto de velocidad (speed)
-        mcl_potions.give_effect_by_level("swiftness", player, 1, 16, false)
-    end
+    mcl_potions.give_effect_by_level("swiftness", player, 1, 16, false)
 end)
 
 -- Café con azúcar
 register_bottled_item("sugar_coffee", "Coffee with Sugar", 3.0, 10, function(_, player)
-    if player and player:is_player() and mcl_potions then
-		-- Opcional: Otorgar un breve efecto de velocidad (speed)
-        mcl_potions.give_effect_by_level("swiftness", player, 1, 25, false)
-    end
+    mcl_potions.give_effect_by_level("swiftness", player, 1, 25, false)
 end)
 
 -- Aceite de oliva
@@ -68,7 +61,5 @@ register_bottled_item("pesto_sauce", "Pesto Sauce", 2.5, 5)
 
 -- Balde con leche de oveja
 register_bucket_item("sheep_milk_bucket", "Sheep Milk Bucket", 8.5, 9, function(_, player)
-    if player and player:is_player() and mcl_potions then
-        mcl_potions.clear_effects(player)
-    end
+    mcl_potions.clear_effects(player)
 end)
