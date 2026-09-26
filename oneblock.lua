@@ -8,36 +8,97 @@ local function safe_teleport(player)
     if not player or not player:is_player() then return end
 
     local name = player:get_player_name()
-    local min_p = {x = -10, y = 0, z = -10}
-    local max_p = {x = 10, y = 20, z = 10}
+    local spawn_pos = nil
 
-    -- 1. Forzar al motor de Luanti a cargar/generar los chunks en memoria inmediatamente
-    minetest.emerge_area(min_p, max_p, function(blockpos, action, calls_remaining)
-        if calls_remaining == 0 then
-            -- 2. Asegurar físicamente los nodos de la isla
-            minetest.set_node(OVERWORLD_POS, {name = "mcl_core:dirt_with_grass"})
-            minetest.set_node({x = 0, y = 9, z = 0}, {name = "mcl_core:bedrock"})
+    -- 1. Intentar obtener el spawn por mcl_spawn
+    if minetest.get_modpath("mcl_spawn") and mcl_spawn.get_spawn_pos then
+        spawn_pos = mcl_spawn.get_spawn_pos(name) or mcl_spawn.get_spawn_pos(player)
+    end
 
-            -- 3. Teletransportar al jugador sobre el bloque firme
-            if player and player:is_player() then
-                player:set_pos({x = 0.5, y = 11.5, z = 0.5})
-                player:set_velocity({x = 0, y = 0, z = 0})
+    -- 2. Fallback: Intentar obtener el spawn por mcl_beds si mcl_spawn devolvió nil
+    if not spawn_pos and minetest.get_modpath("mcl_beds") and mcl_beds.spawn then
+        spawn_pos = mcl_beds.spawn[name]
+    end
 
-                -- Reconfirmación síncrona a los 0.2s para evitar micro-desfases de física
-                minetest.after(0.2, function()
-                    if player and player:is_player() then
-                        player:set_pos({x = 0.5, y = 11.5, z = 0.5})
-                        player:set_velocity({x = 0, y = 0, z = 0})
-                    end
-                end)
+    -- 3. Verificación de reaparición
+    if spawn_pos then
+        player:set_pos(spawn_pos)
+        player:set_velocity({x = 0, y = 0, z = 0})
+    else
+        -- Lógica de OneBlock cuando realmente no hay cama
+        local min_p = {x = -10, y = 0, z = -10}
+        local max_p = {x = 10, y = 20, z = 10}
+
+        minetest.emerge_area(min_p, max_p, function(blockpos, action, calls_remaining)
+            if calls_remaining == 0 then
+                minetest.set_node(OVERWORLD_POS, {name = "mcl_core:dirt_with_grass"})
+                minetest.set_node({x = 0, y = 9, z = 0}, {name = "mcl_core:bedrock"})
+
+                if player and player:is_player() then
+                    player:set_pos({x = 0.5, y = 11.5, z = 0.5})
+                    player:set_velocity({x = 0, y = 0, z = 0})
+                end
             end
-        end
-    end)
+        end)
+    end
 end
 
-minetest.register_on_newplayer(function(player) safe_teleport(player) end)
-minetest.register_on_joinplayer(function(player) safe_teleport(player) end)
-minetest.register_on_respawnplayer(function(player) safe_teleport(player) return true end)
+-- 1. Jugador Nuevo: Se genera la isla y se le sitúa sobre el bloque por primera vez
+minetest.register_on_newplayer(function(player)
+    safe_teleport(player)
+end)
+
+-- 2. Jugador que se Reconecta: Solo aseguramos los bloques de la isla en memoria 
+-- sin teletransportar ni alterar la posición guardada del jugador.
+minetest.register_on_joinplayer(function(player)
+    if not player or not player:is_player() then return end
+    
+    -- Se fuerzan los chunks en memoria por seguridad, pero NO se mueve al jugador
+    local min_p = {x = -10, y = 0, z = -10}
+    local max_p = {x = 10, y = 20, z = 10}
+    minetest.emerge_area(min_p, max_p, function(blockpos, action, calls_remaining)
+        if calls_remaining == 0 then
+            minetest.set_node(OVERWORLD_POS, {name = "mcl_core:dirt_with_grass"})
+            minetest.set_node({x = 0, y = 9, z = 0}, {name = "mcl_core:bedrock"})
+        end
+    end)
+end)
+
+-- 3. Respawn al Morir (Callback nativo correcto de Luanti: register_on_respawnplayer)
+-- Sobrescribir la función nativa de respawn de mcl_spawn
+if minetest.get_modpath("mcl_spawn") and mcl_spawn.spawn then
+    local old_spawn = mcl_spawn.spawn
+
+    mcl_spawn.spawn = function(player)
+        if not player or not player:is_player() then return end
+        
+        -- Intenta primero el respawn nativo (Cama / Ancla de Respawn)
+        local respawned_at_bed = old_spawn(player)
+        
+        -- Si NO tiene cama/ancla guardada, lo enviamos de forma segura al OneBlock
+        if not respawned_at_bed then
+            -- Pre-cargar los chunks del OneBlock para evitar caídas
+            minetest.emerge_area(
+                {x = -5, y = 5, z = -5}, 
+                {x = 5, y = 15, z = 5}, 
+                function(blockpos, action, calls_remaining)
+                    if calls_remaining == 0 then
+                        -- Asegurar bloques de soporte
+                        minetest.set_node(OVERWORLD_POS, {name = "mcl_core:dirt_with_grass"})
+                        minetest.set_node({x = OVERWORLD_POS.x, y = OVERWORLD_POS.y - 1, z = OVERWORLD_POS.z}, {name = "mcl_core:bedrock"})
+                        
+                        -- Posicionar al jugador encima del bloque de forma segura
+                        player:set_pos({x = OVERWORLD_POS.x + 0.5, y = OVERWORLD_POS.y + 1.5, z = OVERWORLD_POS.z + 0.5})
+                        player:set_velocity({x = 0, y = 0, z = 0})
+                    end
+                end
+            )
+        end
+        
+        -- Desactivar reposicionamiento por defecto del motor de Luanti
+        return true
+    end
+end
 
 -- 1. CONTROL DE PERSISTENCIA
 local storage = minetest.get_mod_storage()
@@ -143,12 +204,14 @@ local ow_standard_loot = {
     --"mcl_farming:sweet_berry",
     "mcl_core:stone 9",
     "mcl_torches:torch 2", 
+    "mcl_beds:bed_red_bottom",
+    "mcl_beds:bed_blue_bottom",
     
 }
 
 -- Botín especial / Tesoros (Libros encantados, equipamiento, mapas/marítimos)
 local ow_special_loot = {
-    "mcl_enchanting:book", -- Libro para encantar 
+    -- "mcl_enchanting:book", -- Libro para encantar no declarado
     "mcl_tools:sword_diamond", 
     "mcl_tools:pick_diamond",
     "mcl_farming:hoe_diamond", 

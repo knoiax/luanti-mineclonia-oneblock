@@ -257,21 +257,3 @@ core.register_craft({
 	output = PREFIX ..  "olivewood 3",
 	recipe = {{PREFIX ..  "stripped_olivetree_bark"}},
 })
-
---core.register_craft({
---	output = "mcl_stairs:slab_olivewood 6",
---	recipe = {
---		{PREFIX ..  "olivewood", PREFIX ..  "olivewood", PREFIX ..  "olivewood"},
---	}
---})
-
---core.register_craft({
---	output = "mcl_stairs:stair_olivewood 4",
---	recipe = {
---		{PREFIX ..  "olivewood", "", ""},
---		{PREFIX ..  "olivewood", PREFIX ..  "olivewood", ""},
---		{PREFIX ..  "olivewood", PREFIX ..  "olivewood", PREFIX ..  "olivewood"},
---	}
---})
-
---"mcl_crafting_table:crafting_table"

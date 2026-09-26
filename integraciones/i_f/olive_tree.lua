@@ -4,12 +4,15 @@ local PREFIX = mcl_eodp.prefix.italian_food
 local S = minetest.get_translator(modname)
 local modpath = minetest.get_modpath(minetest.get_current_modname())
 
+-- Declaración anticipada del contenedor de lógica del árbol de olivo
+local olive_tree = {}
+
 -- 1. Madera de Olivo (Planks)
 minetest.register_node(PREFIX .. "olivewood", {
     description = S("Olive Wood Planks"),
     tiles = { modname .. "_planks.png" },
     is_ground_content = false,
-    groups = { handy = 1, axey = 1, building_block = 1, material_wood = 1, flammable = 3 },
+    groups = { handy = 1, axey = 1, building_block = 1, material_wood = 1, flammable = 3, wood = 1},
     sounds = mcl_sounds.node_sound_wood_defaults(),
 })
 
@@ -90,13 +93,15 @@ minetest.register_node(PREFIX .. "olivesapling", {
 })   
 
 -- 6. Lógica de crecimiento del Esquemático de Olivo
-local olive_tree = {}   
-
 function olive_tree.generate(pos)
     local i = math.random(1, 3)
     local path = modpath .. "/schematics/eodp_it_f_olive_tree_" .. i .. ".mts"
     minetest.set_node(pos, { name = "air" })
-    return minetest.place_schematic(pos, path, "random", nil, true)
+    return minetest.place_schematic(pos, path, "random", {
+        ["italian_food:olivetree"] = PREFIX .. "olivetree",
+        ["italian_food:oliveleaves"] = PREFIX .. "oliveleaves",
+        ["italian_food:olivetree_bark"] = PREFIX .. "olivetree",
+    }, true)
 end   
 
 -- Crecimiento natural mediante ABM (Mineclonia / Luanti standard)

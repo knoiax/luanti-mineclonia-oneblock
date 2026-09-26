@@ -34,3 +34,37 @@ core.register_craft({
 		{IF_PREFIX .. "sheep_milk_bucket", "mcl_buckets:bucket_empty"},
 	},
 })
+
+core.register_craft({
+	output = PREFIX .. "slab_olivewood 6",
+	recipe = {
+		{IF_PREFIX ..  "olivewood", IF_PREFIX ..  "olivewood", IF_PREFIX ..  "olivewood"},
+	}
+})
+
+core.register_craft({
+	output = PREFIX .. "stair_olivewood 4",
+	recipe = {
+		{IF_PREFIX ..  "olivewood", "", ""},
+		{IF_PREFIX ..  "olivewood", IF_PREFIX ..  "olivewood", ""},
+		{IF_PREFIX ..  "olivewood", IF_PREFIX ..  "olivewood", IF_PREFIX ..  "olivewood"},
+	}
+})
+
+core.register_craft({
+	output = PREFIX .. "slab_lemonwood 6",
+	recipe = {
+		{PREFIX ..  "lemonwood", PREFIX ..  "lemonwood", PREFIX ..  "lemonwood"},
+	}
+})
+
+core.register_craft({
+	output = PREFIX .. "stair_lemonwood 4",
+	recipe = {
+		{PREFIX ..  "lemonwood", "", ""},
+		{PREFIX ..  "lemonwood", PREFIX ..  "lemonwood", ""},
+		{PREFIX ..  "lemonwood", PREFIX ..  "lemonwood", PREFIX ..  "lemonwood"},
+	}
+})
+
+--"mcl_crafting_table:crafting_table"

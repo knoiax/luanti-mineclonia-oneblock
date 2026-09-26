@@ -26,7 +26,7 @@ minetest.register_node(PREFIX .. "lemonwood", {
     description = S("Lemon Wood Planks"),
     tiles = { modname .. "_lemon_planks.png" },
     is_ground_content = false,
-    groups = { handy = 1, axey = 1, building_block = 1, material_wood = 1, flammable = 3 },
+    groups = { handy = 1, axey = 1, building_block = 1, material_wood = 1, flammable = 3 , wood=1},
     sounds = mcl_sounds.node_sound_wood_defaults(),
 })
 
