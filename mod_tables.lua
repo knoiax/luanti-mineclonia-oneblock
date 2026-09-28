@@ -1,7 +1,8 @@
 local T = mcl_eodp.prefix -- Alias corto para escribir menos código
 
 -- Contenedor global de tablas del mod (evita sobreescrituras si se carga varias veces)
-el_oneblock_de_papi_tables = el_oneblock_de_papi_tables or {}
+mcl_eodp.tables = mcl_eodp.tables or {}
+el_oneblock_de_papi_tables = mcl_eodp.tables
 
 -- 1. Categoría: Italian Food (Ítemes y alimentos externos adaptados)
 el_oneblock_de_papi_tables.italian_food = {

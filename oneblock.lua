@@ -3,18 +3,66 @@ local OVERWORLD_POS = {x = 0, y = 10, z = 0}
 local IF_PREFIX = mcl_eodp.prefix.italian_food
 local PREFIX = mcl_eodp.prefix.de_papi
 
--- ====================================================================
--- SECCIÓN DE REAPARICIÓN Y TELETRANSPORTE SEGURO
--- ====================================================================
-
--- Referencia a la posición central de tu OneBlock
 local ob_pos = OVERWORLD_POS
+local dead_players = {}
+-- 1. Captura cuando un jugador muere
+minetest.register_on_dieplayer(function(player, reason)
+    if not player or not player:is_player() then return end
+    local name = player:get_player_name()
+    dead_players[name] = true
 
--- Función robusta y segura para ubicar al jugador en el OneBlock sin fallos ni alturas locas
+    -- Anular velocidad de caída de inmediato durante la pantalla de muerte
+    player:set_velocity({x = 0, y = 0, z = 0})
+    player:set_acceleration({x = 0, y = 0, z = 0})
+
+    -- Precarga del entorno OneBlock antes del respawn
+    minetest.emerge_area(
+        {x = ob_pos.x - 2, y = ob_pos.y - 2, z = ob_pos.z - 2},
+        {x = ob_pos.x + 2, y = ob_pos.y + 2, z = ob_pos.z + 2}
+    )
+end)
+
+-- 2. Captura cuando cambia la salud del jugador
+minetest.register_on_player_hpchange(function(player, hp_change, replace_original)
+    if not player or not player:is_player() then return hp_change end
+    local name = player:get_player_name()
+    if dead_players[name] and hp_change < 0 then
+        return 0
+    end
+    return hp_change
+end, true)
+
+-- Garantizar reseteo de la bandera de muerte y temporizador de inmunidad post-respawn
+minetest.register_on_respawnplayer(function(player)
+    if not player or not player:is_player() then return end
+    local name = player:get_player_name()
+    -- Activar inmunidad de 1.0 segundo únicamente post-respawn para absorber daño residual
+    dead_players[name] = true
+    minetest.after(1.0, function()
+        dead_players[name] = nil
+    end)
+    -- Se retorna nil para no bloquear la lógica de posición de mcl_spawn
+end)
+
+-- ====================================================================
+-- CONTROL DE REAPARICIÓN BLINDADO (Anti-Doble Muerte)
+-- ====================================================================
+
 local function force_oneblock_spawn(player)
     if not player or not player:is_player() then return end
+    local name = player:get_player_name()
+    -- Mantener inmunidad solo por 1 segundo post-respawn para absorber daño residual
+    dead_players[name] = true
+    minetest.after(1.0, function()
+        dead_players[name] = nil
+    end)
 
-    -- 1. Asegurar el área de forma inmediata
+    -- 1. Frenado síncrono inmediato para matar cualquier inercia de caída residual
+    player:set_velocity({x = 0, y = 0, z = 0})
+    player:set_acceleration({x = 0, y = 0, z = 0})
+    player:set_pos({x = ob_pos.x + 0.5, y = ob_pos.y + 1.5, z = ob_pos.z + 0.5})
+
+    -- 2. Asegurar el área de forma instantánea
     minetest.emerge_area(
         {x = ob_pos.x - 2, y = ob_pos.y - 2, z = ob_pos.z - 2},
         {x = ob_pos.x + 2, y = ob_pos.y + 2, z = ob_pos.z + 2},
@@ -30,8 +78,10 @@ local function force_oneblock_spawn(player)
                 end
 
                 -- 2. Posicionar al jugador limpiamente anulando toda inercia de caída
-                player:set_velocity({x = 0, y = 0, z = 0})
-                player:set_pos({x = ob_pos.x + 0.5, y = ob_pos.y + 1.5, z = ob_pos.z + 0.5})
+                if player and player:is_player() then
+                    player:set_velocity({x = 0, y = 0, z = 0})
+                    player:set_pos({x = ob_pos.x + 0.5, y = ob_pos.y + 1.5, z = ob_pos.z + 0.5})
+                end
                 
                 -- Doble reconfirmación síncrona instantánea para evitar desfases de física
                 minetest.after(0.1, function()
@@ -75,30 +125,42 @@ if minetest.get_modpath("mcl_spawn") and mcl_spawn.spawn then
     mcl_spawn.spawn = function(player)
         if not player or not player:is_player() then return end
 
+        -- 1. Anular toda inercia previa antes de procesar el destino
+        player:set_velocity({x = 0, y = 0, z = 0})
+
         local meta = player:get_meta()
         local spawn_str = meta:get_string("mcl_beds:spawn")
         local has_valid_bed = false
 
-        -- Verificar si realmente tiene una cama registrada y si el nodo de la cama sigue físico y existente
+        -- Verificar la cama asegurando no borrar el spawn si el chunk no está cargado ("ignore")
         if spawn_str and spawn_str ~= "" then
             local bed_pos = minetest.string_to_pos(spawn_str)
             if bed_pos then
                 local node = minetest.get_node_or_nil(bed_pos)
-                -- Comprobar si sigue siendo una cama o un ancla de reaparición válida
-                if node and (string.find(node.name, "bed") or string.find(node.name, "respawn_anchor")) then
-                    has_valid_bed = true
+                if not node then
+                    node = minetest.get_node(bed_pos)
+                end
+
+                if node and node.name ~= "ignore" then
+                    -- Chunk cargado: verificar físicamente el bloque
+                    if string.find(node.name, "bed") or string.find(node.name, "respawn_anchor") then
+                        has_valid_bed = true
+                    else
+                        -- Cama/Ancla fue destruida realmente, limpiar metadatos
+                        meta:set_string("mcl_beds:spawn", "")
+                    end
                 else
-                    -- Si la cama fue destruida, limpiamos el meta automáticamente
-                    meta:set_string("mcl_beds:spawn", "")
+                    -- Chunk no cargado ("ignore"): asumir que la cama sigue ahí para no borrarla
+                    has_valid_bed = true
                 end
             end
         end
 
+        -- 2. Si tiene cama válida, delegar en Mineclonia asegurando velocidad cero
         if has_valid_bed then
-            -- Si tiene cama válida, dejamos que Mineclonia maneje el respawn en la cama de forma limpia
+            -- Intentar respawn nativo en cama
             local success = old_spawn(player)
             if success then
-                -- Diferimos el corte de física por un tick para que capture al jugador ya reaparecido
                 minetest.after(0, function(p)
                     if p and p:is_player() then
                         p:set_velocity({x = 0, y = 0, z = 0})
@@ -109,11 +171,8 @@ if minetest.get_modpath("mcl_spawn") and mcl_spawn.spawn then
             end
         end
 
-        -- Si NO tiene cama (o se destruyó), lo mandamos de forma blindada al OneBlock
+        -- 3. Si no tiene cama, forzar directamente al OneBlock de forma atómica
         force_oneblock_spawn(player)
-        -- Refuerzo crítico en el mismo tick:
-        player:set_velocity({x = 0, y = 0, z = 0})
-        player:set_acceleration({x = 0, y = 0, z = 0}) -- <-- Corta de raíz la física de caída acumulada
         return true
     end
 end
