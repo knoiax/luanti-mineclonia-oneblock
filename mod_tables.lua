@@ -1,10 +1,10 @@
 local T = mcl_eodp.prefix -- Alias corto para escribir menos código
 
--- En tu archivo de tablas (ej. mod_tables.lua)
+-- Contenedor global de tablas del mod (evita sobreescrituras si se carga varias veces)
 el_oneblock_de_papi_tables = el_oneblock_de_papi_tables or {}
 
+-- 1. Categoría: Italian Food (Ítemes y alimentos externos adaptados)
 el_oneblock_de_papi_tables.italian_food = {
-    -- Ítemes de comida
     T.italian_food .. "pizza",
     T.italian_food .. "mushroom_pizza",
     T.italian_food .. "lasagna",
@@ -27,22 +27,16 @@ el_oneblock_de_papi_tables.italian_food = {
     T.italian_food .. "pandoro",
     T.italian_food .. "coffee",
     T.italian_food .. "sugar_coffee",
-    
-    -- Semillas y Cultivos
-    T.italian_food .. "basil_seeds",
-    T.italian_food .. "basil_seeds",
-    T.italian_food .. "tomato_plant_seeds",
-    T.italian_food .. "coffee_bean",
-    
-    -- Bloques y Maderas
-    T.italian_food .. "olivetree",
+    -- Bloques, maderas y derivados de olivo incluidos en la integración
     T.italian_food .. "olivewood",
     T.italian_food .. "olivesapling",
-    T.italian_food .. "cheese_rack",
-    T.italian_food .. "coffee_sack",
-    
-    -- Herramientas
-    T.italian_food .. "rolling_pin",
-    T.italian_food .. "iron_rolling_pin",
-    T.italian_food .. "pizza_cutter_wheel"
+}
+
+-- 2. Categoría: Tus elementos propios (Limonero y producción principal)
+el_oneblock_de_papi_tables.lemon_stuff = {
+    T.de_papi .. "lemon",
+    T.de_papi .. "lemonade",
+    T.de_papi .. "lemonwood",
+    T.de_papi .. "lemonsapling",
+    T.de_papi .. "leave_lemon", -- O el nombre exacto de tus hojas de limonero registradas
 }

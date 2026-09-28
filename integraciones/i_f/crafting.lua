@@ -181,7 +181,7 @@ core.register_craft({
     recipe = {
         {"","mcl_cocoas:cocoa_beans", ""},
         {"", PREFIX ..  "dough", ""},
-        {"", "mcl_throwing:egg", ""},z
+        {"", "mcl_throwing:egg", ""},
     },
 })
 -- RECETAS DE CRAFTEO DE TOMATE Y ALBAHACA DE DIAMANTE
