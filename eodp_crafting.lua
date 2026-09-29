@@ -36,14 +36,14 @@ core.register_craft({
 })
 
 core.register_craft({
-	output = PREFIX .. "slab_olivewood 6",
+	output = IF_PREFIX .. "slab_olivewood 6",
 	recipe = {
 		{IF_PREFIX ..  "olivewood", IF_PREFIX ..  "olivewood", IF_PREFIX ..  "olivewood"},
 	}
 })
 
 core.register_craft({
-	output = PREFIX .. "stair_olivewood 4",
+	output = IF_PREFIX .. "stair_olivewood 4",
 	recipe = {
 		{IF_PREFIX ..  "olivewood", "", ""},
 		{IF_PREFIX ..  "olivewood", IF_PREFIX ..  "olivewood", ""},

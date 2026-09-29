@@ -16,8 +16,8 @@ mcl_stairs.register_stair_and_slab("lemonwood", {
 })
 
 -- 3. Registro de Escaleras y Losas para Madera de Olivo
-mcl_stairs.register_stair_and_slab("olivewood", {
-    baseitem = IF_PREFIX .. "olivewood",
-    description_stair = S("Olive Wood Stairs"),
-    description_slab = S("Olive Wood Slab"),
-})
+--mcl_stairs.register_stair_and_slab("olivewood", {
+    --baseitem = IF_PREFIX .. "olivewood",
+    --description_stair = S("Olive Wood Stairs"),
+    --description_slab = S("Olive Wood Slab"),
+--})
