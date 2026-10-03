@@ -38,11 +38,26 @@ Tomato Spaghetti=Espagueti con Tomate
 # --- Bloques, Nodos y Madera (Blocks & Wood) ---
 Cheese Rack=Quesera
 Coffee Sack=Saco de Café
+Olive Tree=Olivo
 Olive Sapling=Brote de Olivo
 Olive Tree Leaves=Hojas de Olivo
 Olive Tree Log=Tronco de Olivo
 Olive Wood Planks=Tablas de Madera de Olivo
 Stripped Olive Tree Log=Tronco de Olivo Descortezado
+Stripped Olive Tree Bark=Corteza de Olivo Pelada
+Olive Wood Slabs=Losas de Madera de Olivo
+Olive Bark Slabs=Losas de Corteza de Olivo
+Olive Wood Door=Puerta de Madera de Olivo
+Olive Wood Trapdoor=Trampilla de madera de olivo
+Olive Tree Bark=Corteza de Olivo
+Olive Wood Stairs=Escaleras de Madera de Olivo
+Olive Tree Bark Stairs=Escaleras de Corteza de Olivo
+Olive Wood Fence=Valla de Madera de Olivo
+Olive Wood Fence Gate=Puerta de Valla de Madera de Olivo
+Olive Wood Boat=Bote de Madera de Olivo
+Olive Wood Boat With Chest=Bote de Madera de Olivo con Cofre
+Olive Wood Button=Botón de Madera de Olivo
+Olive Wood Pressure Plate=Placa de Presión de Madera de Olivo
 
 # --- Plantas y Cultivos (Plants & Crops) ---
 Basil Seeds=Semillas de Albahaca

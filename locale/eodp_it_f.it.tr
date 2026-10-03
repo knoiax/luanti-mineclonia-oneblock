@@ -38,11 +38,26 @@ Tomato Spaghetti=Spaghetti al Pomodoro
 # --- Blocchi, Nodi e Legno (Blocks & Wood) ---
 Cheese Rack=Scalera per Formaggi
 Coffee Sack=Sacco di Caffè
-Olive Sapling=Arbustello d'Olivo
-Olive Tree Leaves=Foglie d me
-Olive Tree Log=Tronco d'Olivo
-Olive Wood Planks=Assi di Legno d'Olivo
-Stripped Olive Tree Log=Tronco d'Olivo Scortecciato
+Olive Tree=Albero d'Ulivo
+Olive Sapling=Arbustello d'Ulivo
+Olive Tree Leaves=Foglie d'Ulivo
+Olive Tree Log=Tronco d'Ulivo
+Olive Wood Planks=Assi di Legno d'Ulivo
+Stripped Olive Tree Log=Tronco d'Ulivo Scortecciato
+Stripped Olive Tree Bark=Corteccia d'Ulivo scortecciata
+Olive Wood Slabs=Lastre in Legno d'Ulivo
+Olive Bark Slabs=Lastre di Corteccia d'Ulivo
+Olive Wood Door=Porta in Legno d'Ulivo
+Olive Wood Trapdoor=Botola in Legno d'Ulivo
+Olive Tree Bark=Corteccia d'Ulivo
+Olive Wood Stairs=Scale in Legno d'Ulivo
+Olive Tree Bark Stairs=Scale in Corteccia d'Ulivo
+Olive Wood Fence=Recinzione in Legno d'Ulivo
+Olive Wood Fence Gate=Cancello in Legno d'Ulivo
+Olive Wood Boat=Barca in Legno d'Ulivo
+Olive Wood Boat With Chest=Barca in Legno d'Ulivo con Cassapanca
+Olive Wood Button=Bottone in legno d'Ulivo
+Olive Wood Pressure Plate=Piastra di Pressione in Legno d'Ulivo
 
 # --- Piante e Colture (Plants & Crops) ---
 Basil Seeds=Semi di Basilico

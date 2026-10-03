@@ -4,7 +4,7 @@ local PREFIX = mcl_eodp.prefix.de_papi
 local S = minetest.get_translator(modname)
 
 -- REGISTRO DE ALIMENTOS PROPIOS (ESTÁNDAR MINECLONIA)
-minetest.register_craftitem(PREFIX .. "lemon", {
+minetest.register_craftitem(PREFIX .. "lemon_fruit", {
   description = S("Lemon"),
   _doc_items_longdesc = S("A very acidic fruit, your eyes close, 90% chance of blindness"),
   inventory_image = modname .. "_lemon.png",

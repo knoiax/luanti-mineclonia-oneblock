@@ -5,7 +5,7 @@ local IF_PREFIX = mcl_eodp.prefix.italian_food
 core.register_craft({
     output = PREFIX .. "lemonade 4",
     recipe = {
-        {PREFIX .. "lemon", PREFIX .. "lemon", PREFIX .. "lemon"},
+        {PREFIX .. "lemon_fruit", PREFIX .. "lemon_fruit", PREFIX .. "lemon_fruit"},
         {"mcl_potions:water", "mcl_core:ice", "mcl_core:sugar"},
         {"mcl_potions:glass_bottle", "mcl_potions:glass_bottle", "mcl_potions:glass_bottle"},
     },
@@ -15,7 +15,7 @@ core.register_craft({
 core.register_craft({
 	output = IF_PREFIX .. "mozzarella",                                 
 	recipe = {
-		{"mcl_mobitems:milk_bucket", PREFIX .. "lemon"},
+		{"mcl_mobitems:milk_bucket", PREFIX .. "lemon_fruit"},
 		{"",""},
 	},
 	replacements = {
@@ -27,44 +27,12 @@ core.register_craft({
 core.register_craft({
 	output = IF_PREFIX .. "sheep_cheese",                                
 	recipe = {
-		{IF_PREFIX .. "sheep_milk_bucket", PREFIX .. "lemon"},
+		{IF_PREFIX .. "sheep_milk_bucket", PREFIX .. "lemon_fruit"},
 		{"",""},
 	},
 	replacements = {
 		{IF_PREFIX .. "sheep_milk_bucket", "mcl_buckets:bucket_empty"},
 	},
-})
-
-core.register_craft({
-	output = IF_PREFIX .. "slab_olivewood 6",
-	recipe = {
-		{IF_PREFIX ..  "olivewood", IF_PREFIX ..  "olivewood", IF_PREFIX ..  "olivewood"},
-	}
-})
-
-core.register_craft({
-	output = IF_PREFIX .. "stair_olivewood 4",
-	recipe = {
-		{IF_PREFIX ..  "olivewood", "", ""},
-		{IF_PREFIX ..  "olivewood", IF_PREFIX ..  "olivewood", ""},
-		{IF_PREFIX ..  "olivewood", IF_PREFIX ..  "olivewood", IF_PREFIX ..  "olivewood"},
-	}
-})
-
-core.register_craft({
-	output = PREFIX .. "slab_lemonwood 6",
-	recipe = {
-		{PREFIX ..  "lemonwood", PREFIX ..  "lemonwood", PREFIX ..  "lemonwood"},
-	}
-})
-
-core.register_craft({
-	output = PREFIX .. "stair_lemonwood 4",
-	recipe = {
-		{PREFIX ..  "lemonwood", "", ""},
-		{PREFIX ..  "lemonwood", PREFIX ..  "lemonwood", ""},
-		{PREFIX ..  "lemonwood", PREFIX ..  "lemonwood", PREFIX ..  "lemonwood"},
-	}
 })
 
 --"mcl_crafting_table:crafting_table"

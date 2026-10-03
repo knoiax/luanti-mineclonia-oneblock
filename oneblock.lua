@@ -195,7 +195,7 @@ local ow_standard_loot = {
     --IF_PREFIX ..  "cannoli",
     --IF_PREFIX ..  "cheese_rack",
     --IF_PREFIX ..  "coffee", 
-    IF_PREFIX ..  "coffee_roasted_bean",
+    --IF_PREFIX ..  "coffee_roasted_bean",
     --IF_PREFIX ..  "coffee_sack",
     --IF_PREFIX ..  "cone",
     --IF_PREFIX ..  "diamond_tomato",
@@ -207,10 +207,10 @@ local ow_standard_loot = {
     --IF_PREFIX ..  "iron_rolling_pin",
     --IF_PREFIX ..  "lasagna",
     --IF_PREFIX ..  "mozzarella",
-    IF_PREFIX ..  "mushroom_pizza",
+    --IF_PREFIX ..  "mushroom_pizza",
     --IF_PREFIX ..  "olive",
     --IF_PREFIX ..  "olive_oil",
-    IF_PREFIX ..  "olivewood",
+    "mcl_trees:wood_olive",
     --IF_PREFIX ..  "pandoro",
     --IF_PREFIX ..  "panettone",
     --IF_PREFIX ..  "pesto_bruschetta",
@@ -218,7 +218,7 @@ local ow_standard_loot = {
     --IF_PREFIX ..  "pizza",
     --IF_PREFIX ..  "pizza_cutter_wheel",
     --IF_PREFIX ..  "pork_jowl",
-    IF_PREFIX ..  "raviolo_raw",
+    --IF_PREFIX ..  "raviolo_raw",
     --IF_PREFIX ..  "rolling_pin",
     --IF_PREFIX ..  "sheep_cheese",
     --IF_PREFIX ..  "sheep_milk_bucket",
@@ -229,13 +229,14 @@ local ow_standard_loot = {
     --IF_PREFIX ..  "tomato",
     --IF_PREFIX ..  "tomato_sauce",
     --IF_PREFIX ..  "tomato_sauce_bruschetta",
-    IF_PREFIX .. "basil_seeds",
+    --IF_PREFIX .. "basil_seeds",
     IF_PREFIX .. "tomato_plant_seeds",
-    IF_PREFIX .. "olivesapling",
+    "mcl_trees:sapling_olive",
+    "mcl_core:ice",
     
     -- MIS CREACIONES
     PREFIX .. "lemon",
-    PREFIX .. "lemonsapling",
+    "mcl_trees:sapling_lemon",
     PREFIX .. "lemonade 4",
 
 
@@ -263,6 +264,7 @@ local ow_standard_loot = {
     --"mcl_farming:carrot", 
     --"mcl_farming:bread",
     --"mcl_farming:potato", 
+    "mcl_core:dirt 5", 
     "mcl_core:iron_ingot", 
     --"mcl_core:gold_ingot", 
     --"mcl_tridents:trident",
@@ -290,11 +292,12 @@ local ow_standard_loot = {
 local ow_special_loot = {
     -- "mcl_enchanting:book", -- Libro para encantar no declarado
     "mcl_tools:sword_diamond", 
+    "mcl_tools:axe_diamond",
     "mcl_tools:pick_diamond",
     "mcl_farming:hoe_diamond", 
     "mcl_armor:chestplate_diamond",
     "mcl_cake:cake",
-    "mobs_mc:ravager",
+    --"mobs_mc:ravager", --destructor
     "mcl_sponges:sponge", 
     "mcl_core:emerald 4", 
     "mcl_core:diamond 2",
@@ -308,7 +311,7 @@ local ow_special_loot = {
     "mcl_trees:sapling_jungle",
     "mcl_trees:sapling_spruce", 
     "mcl_trees:sapling_cherry_blossom", 
-    "mobs_mc:illusioner",
+    --"mobs_mc:illusioner",
 }
 -- COFRES NETHER
 local nether_standard_loot = {
