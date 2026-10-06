@@ -48,6 +48,9 @@ mcl_trees.register_wood("olive", {
         inventory_image = modname .. "_olive_sapling.png",
         wield_image = modname .. "_olive_sapling.png",
     },
+    potted_sapling = {
+        image = modname .. "_olive_sapling.png",
+    },
     slab = {
         description = S("Olive Wood Slabs"),
         bark = {

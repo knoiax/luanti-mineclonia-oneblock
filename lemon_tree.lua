@@ -41,6 +41,9 @@ mcl_trees.register_wood("lemon", {
         inventory_image = modname .. "_lemon_sapling.png",
         wield_image = modname .. "_lemon_sapling.png",
     },
+    potted_sapling = {
+        image = modname .. "_lemon_sapling.png",
+    },
     slab = {
         description = S("Lemon Wood Slabs"),
         bark = {

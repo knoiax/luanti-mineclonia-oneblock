@@ -7,7 +7,7 @@ local S = minetest.get_translator(modname)
 local mofood_longdesc = S("This is a food item which can be eaten.")
 
 -- Función auxiliar para registrar comida
-local function register_food_item(name, description, image, saturation, eat_value, comp_value )
+local function register_food_item(name, description, image, saturation, eat_value, comp_value, effect_fn )
 	minetest.register_craftitem(name, {
 		description = description,
 		_doc_items_longdesc = mofood_longdesc,
