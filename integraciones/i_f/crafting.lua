@@ -4,14 +4,14 @@ core.register_craft({
     output = PREFIX ..  "dough",
     recipe = {
         {"", "mcl_farming:wheat_item", ""}, 
-        {"mcl_farming:wheat_item", "mcl_farming:wheat_item", "mcl_farming:wheat_item"},
+        {"mcl_farming:wheat_item", PREFIX ..  "olive_oil", "mcl_farming:wheat_item"},
         {"", "mcl_farming:wheat_item", ""}, 
     },
 })
 core.register_craft({
     output = PREFIX ..  "pizza",
     recipe = {
-        {"", PREFIX ..  "mozzarella", ""}, 
+        {PREFIX .. "olive" , PREFIX ..  "mozzarella", PREFIX .. "olive"}, 
         {PREFIX ..  "tomato_sauce", PREFIX ..  "tomato_sauce", PREFIX ..  "tomato_sauce"}, 
         {PREFIX ..  "dough", PREFIX ..  "dough", PREFIX ..  "dough"}, 
     },

@@ -190,8 +190,8 @@ local end_island_created = storage:get_string("end_island_created") == "true"
 local ow_standard_loot = {
 
     -- Italian_food
-    --IF_PREFIX ..  "basil",
-    --IF_PREFIX ..  "bruschetta",
+    IF_PREFIX ..  "basil",
+    IF_PREFIX ..  "bruschetta",
     --IF_PREFIX ..  "cannoli",
     --IF_PREFIX ..  "cheese_rack",
     --IF_PREFIX ..  "coffee", 
@@ -210,12 +210,12 @@ local ow_standard_loot = {
     --IF_PREFIX ..  "mushroom_pizza",
     --IF_PREFIX ..  "olive",
     --IF_PREFIX ..  "olive_oil",
-    "mcl_trees:wood_olive",
+    --"mcl_trees:wood_olive",
     --IF_PREFIX ..  "pandoro",
     --IF_PREFIX ..  "panettone",
     --IF_PREFIX ..  "pesto_bruschetta",
     --IF_PREFIX ..  "pesto_sauce",
-    --IF_PREFIX ..  "pizza",
+    IF_PREFIX ..  "pizza",
     --IF_PREFIX ..  "pizza_cutter_wheel",
     --IF_PREFIX ..  "pork_jowl",
     --IF_PREFIX ..  "raviolo_raw",
@@ -230,14 +230,15 @@ local ow_standard_loot = {
     --IF_PREFIX ..  "tomato_sauce",
     --IF_PREFIX ..  "tomato_sauce_bruschetta",
     --IF_PREFIX .. "basil_seeds",
-    IF_PREFIX .. "tomato_plant_seeds",
-    "mcl_trees:sapling_olive",
-    "mcl_core:ice",
+    --IF_PREFIX .. "tomato_plant_seeds",
+    --"mcl_trees:sapling_olive",
+    --"mcl_core:ice",
+    --"mcl_mushrooms:mushroom_brown",
     
     -- MIS CREACIONES
-    PREFIX .. "lemon",
-    "mcl_trees:sapling_lemon",
-    PREFIX .. "lemonade 4",
+    --PREFIX .. "fruit_lemon",
+    --"mcl_trees:sapling_lemon",
+    --PREFIX .. "lemonade 4",
 
 
 

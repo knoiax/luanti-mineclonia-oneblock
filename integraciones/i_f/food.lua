@@ -14,8 +14,7 @@ local function register_food_item(name, description, image, saturation, eat_valu
 		inventory_image = image,
 		groups = {food = 2, eatable = eat_value, compostability = comp_value or 0},
 		_mcl_saturation = saturation,
-		on_place = minetest.item_eat(eat_value),
-		on_secondary_use = minetest.item_eat(eat_value),
+		_mcl_eat_effect = effect_fn,
 	})
 end
 
@@ -37,7 +36,8 @@ register_food_item(PREFIX .. "panettone", S("Panettone"), modname .. "_panettone
 register_food_item(PREFIX .. "pandoro", S("Pandoro"), modname .. "_pandoro.png", 7, 8, 40)
 register_food_item(PREFIX .. "pesto_bruschetta", S("Pesto Sauce Bruschetta"), modname .. "_pesauce_bruschetta.png", 24, 20, 90)
 register_food_item(PREFIX .. "pork_jowl", S("Pork Jowl"), modname .. "_pork_jowl.png", 5, 3)
-register_food_item(PREFIX .. "pizza", S("Pizza"), modname .. "_pizza.png", 16, 15)
+register_food_item(PREFIX .. "pizza", S("Pizza"), modname .. "_pizza.png", 32, 15)
+register_food_item(PREFIX .. "mushroom_pizza", S("Mushroom Pizza"), modname .. "_mushroom_pizza.png", 40, 20)
 register_food_item(PREFIX .. "raviolo_raw", S("Raw Raviolo"), modname .. "_raviolo.png", 12, 12)
 register_food_item(PREFIX .. "sheep_cheese", S("Sheep Cheese"), modname .. "_sheep_cheese.png", 9, 8)
 register_food_item(PREFIX .. "spaghetti", S("Tomato Spaghetti"), modname .. "_spaghetti.png", 12, 10, 50)
