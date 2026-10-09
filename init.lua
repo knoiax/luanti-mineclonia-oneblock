@@ -1,5 +1,6 @@
 -- Forzar generador de mapa singlenode (mundo vacío)
 minetest.set_mapgen_setting("mg_name", "singlenode", true)
+minetest.set_mapgen_setting("mg_flags", "nocaves, nodungeons, nodecorations, nolores", true)
 
 local modname = minetest.get_current_modname()
 local modpath = minetest.get_modpath(minetest.get_current_modname())
@@ -24,6 +25,8 @@ dofile(modpath .. "/integraciones/i_f/crops.lua")
 
 
 -- Cargar lógica principal de OneBlock
+dofile(modpath .. "/phases.lua")
+dofile(modpath .. "/chests.lua")
 dofile(modpath .. "/oneblock.lua")
 dofile(modpath .. "/lemon_tree.lua")
 dofile(modpath .. "/eodp_food.lua")
@@ -31,6 +34,7 @@ dofile(modpath .. "/eodp_crafting.lua")
 dofile(modpath .. "/villager_trades.lua")
 dofile(modpath .. "/wandering_trader_trades.lua")
 dofile(modpath .. "/anti_cheat.lua")
+
 
 -- Integracion de modulos de terceros
 -- 3. Tercero: Cargar el registro de ítems de cada integración
