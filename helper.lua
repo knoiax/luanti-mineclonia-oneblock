@@ -28,6 +28,119 @@ if mcl_levelgen then
     end
 end
 
+if not mcl_eodp then mcl_eodp = {} end
+
+-- Inicializar el generador aleatorio exclusivo de mcl_eodp
+mcl_eodp.pr = mcl_eodp.pr or PcgRandom(os.time())
+
+--=====================================
+--Registro rápido de alimentos
+--=====================================
+local I = minetest.get_translator("eodp_it_f")
+
+-- En el archivo principal de carga o helper (ej. init.lua o un archivo de utilidades)
+if not mcl_eodp then mcl_eodp = {} end
+
+-- Definimos la descripción genérica de ayuda para Mineclonia
+local mofood_longdesc = I("This is a food item which can be eaten.")
+
+-- Función auxiliar compartida y accesible globalmente
+function mcl_eodp.register_food_item(name, description, image, saturation, eat_value, comp_value, effect_fn)
+    minetest.register_craftitem(name, {
+        description = description,
+        _doc_items_longdesc = mofood_longdesc,
+        inventory_image = image,
+        groups = {food = 2, eatable = eat_value, can_eat_when_full = 1, compostability = comp_value or 0},
+        _mcl_saturation = saturation,
+        _mcl_eat_effect = effect_fn,
+    })
+end
+
+--=====================================
+--Registro de Pizzas
+--=====================================
+-- Función auxiliar para registrar la familia completa de nodos de cualquier pizza,
+-- soportando prefijos independientes para el nodo y para su slice correspondiente.
+function mcl_eodp.register_pizza_family(pizza_key, description, slice_item_full_name, custom_node_prefix)
+    local PREFIX = custom_node_prefix or mcl_eodp.prefix.de_papi
+    
+    -- Node box con grosor preciso de 2 píxeles (0.125 de altura)
+    local pizza_node_box = {
+        type = "fixed",
+        fixed = { {-0.5, -0.5, -0.5, 0.5, -0.375, 0.5} }
+    }
+
+    local cake_groups = { 
+        choppy = 2, 
+        oddly_breakable_by_hand = 2, 
+        snappy = 3, 
+        attached_node = 1,
+        dig_by_piston = 1, 
+        unsticky = 1 
+    }
+
+    for i = 8, 1, -1 do
+        local node_name = (i == 8) and (PREFIX .. pizza_key) or (PREFIX .. pizza_key .. "_" .. i)
+        
+        -- Textura real existente en tus assets
+        local texture = (i == 8) and ("eodp_node_" .. pizza_key .. ".png") 
+                                  or ("eodp_node_" .. pizza_key .. "_" .. i .. ".png")
+        
+        local desc = (i == 8) and description or (description .. " (" .. i .. "/8 porciones)")
+
+        minetest.register_node(node_name, {
+            description = desc,
+            drawtype = "nodebox",
+            -- Al pasar un solo string en tiles, Minetest aplica esta textura existente a todas las caras
+            tiles = { texture },
+            inventory_image = "eodp_node_" .. pizza_key .. ".png",
+            wield_image = "eodp_node_" .. pizza_key .. ".png",
+            paramtype = "light",
+            paramtype2 = "facedir",
+            use_texture_alpha = "clip", -- Recorta la transparencia exterior dejando la forma circular limpia
+            node_box = pizza_node_box,
+            selection_box = pizza_node_box,
+            stack_max = 1,
+            drop = "",
+            sounds = mcl_sounds.node_sound_wood_defaults(),
+            is_ground_content = false,
+            groups = table.merge(cake_groups, {
+                not_in_creative_inventory = (i < 8 and 1 or 0),
+                pizza = i
+            }),
+            
+            on_rightclick = function(pos, node, clicker, itemstack)
+                if mcl_util.check_position_protection and mcl_util.check_position_protection(pos, clicker) then
+                    return
+                end
+
+                local current_slices = core.get_item_group(node.name, "pizza")
+
+                if slice_item_full_name then
+                    local inv = clicker:get_inventory()
+                    if inv then
+                        local leftover = inv:add_item("main", ItemStack(slice_item_full_name))
+                        if not leftover:is_empty() then
+                            minetest.item_drop(leftover, clicker, pos)
+                        end
+                    end
+                end
+
+                if current_slices <= 1 then
+                    minetest.remove_node(pos)
+                    minetest.check_for_falling(pos)
+                else
+                    local next_name = PREFIX .. pizza_key .. "_" .. (current_slices - 1)
+                    minetest.swap_node(pos, {name = next_name, param2 = node.param2})
+                end
+
+                minetest.sound_play("mcl_eating_eat", {pos = pos, gain = 0.8}, true)
+            end,
+        })
+    end
+end
+
+
 -- helper.lua - Encapsulación y Diagnóstico
 local OneBlockHelper = {}
 

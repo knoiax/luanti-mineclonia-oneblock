@@ -52,6 +52,7 @@ chests.loot_tables = {
             { name = "mcl_farming:pumpkin_seeds", count = {min = 1, max = 3}, chance = 0.3 },
             { name = PREFIX .. "lemon_fruit", count = {min = 1, max = 3}, chance = 0.2 },
             { name = IF_PREFIX ..  "basil", count = {min = 1, max = 3}, chance = 0.2 },
+            { name = IF_PREFIX ..  "tomato", count = {min = 1, max = 3}, chance = 0.2 },
         },
 
     },

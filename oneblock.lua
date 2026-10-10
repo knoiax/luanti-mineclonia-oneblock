@@ -209,7 +209,7 @@ minetest.register_on_dignode(function(pos, oldnode, digger)
     local end_pos_str = storage:get_string("end_ob_pos")
     local end_pos = end_pos_str ~= "" and minetest.string_to_pos(end_pos_str) or nil
 
-    local pr = mcl_oneblock and mcl_oneblock.pr or PcgRandom(os.time())
+    local pr = mcl_eodp.pr
 
     -- A. ONEBLOCK OVERWORLD
     if pos.x == OVERWORLD_POS.x and pos.y == OVERWORLD_POS.y and pos.z == OVERWORLD_POS.z then

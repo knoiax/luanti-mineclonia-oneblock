@@ -1,6 +1,59 @@
 local PREFIX = mcl_eodp.prefix.italian_food
 
 core.register_craft({
+    output = PREFIX ..  "bruschetta",
+    recipe = {
+        {"", PREFIX ..  "tomato", ""}, 
+        {"", "mcl_farming:bread", ""}, 
+        {"", "", ""}, 
+    },
+})
+core.register_craft({
+    output = PREFIX ..  "cannoli",
+    recipe = {
+        {"","mcl_cocoas:cocoa_beans", ""},
+        {"", PREFIX ..  "dough", ""},
+        {"", "mcl_throwing:egg", ""},
+    },
+})
+core.register_craft({
+    output = PREFIX ..  "coffee",
+    recipe = {
+        {"",PREFIX ..  "coffee_roasted_bean", ""},
+        {"", "mcl_potions:glass_bottle", ""},      
+        {"", "", ""},
+    },
+})
+core.register_craft({
+    type = "cooking",
+    output = PREFIX ..  "coffee_roasted_bean",                                
+    recipe = PREFIX ..  "coffee_bean",
+})
+core.register_craft({
+    output = PREFIX ..  "cone",
+    recipe = {
+        {"","mcl_core:sugar", ""},
+        {"", "mcl_mobitems:milk_bucket", ""},      
+        {"", "mcl_throwing:egg", ""},
+    },
+})
+core.register_craft({
+    output = PREFIX .. "diamond_basil",
+    recipe = {
+        {"", "mcl_core:diamond", ""},
+        {"mcl_core:diamond", PREFIX .. "basil",   "mcl_core:diamond"},
+        {"", "mcl_core:diamond", ""},
+    },
+})
+core.register_craft({
+    output = PREFIX .. "diamond_tomato",
+    recipe = {
+        {"mcl_core:diamond", "", "mcl_core:diamond"},
+        {"", PREFIX .. "tomato",  ""},
+        {"mcl_core:diamond", "", "mcl_core:diamond"},
+    },
+})
+core.register_craft({
     output = PREFIX ..  "dough",
     recipe = {
         {"", "mcl_farming:wheat_item", ""}, 
@@ -9,11 +62,19 @@ core.register_craft({
     },
 })
 core.register_craft({
-    output = PREFIX ..  "pizza",
+    output = PREFIX ..  "gnocco_raw",
     recipe = {
-        {PREFIX .. "olive" , PREFIX ..  "mozzarella", PREFIX .. "olive"}, 
-        {PREFIX ..  "tomato_sauce", PREFIX ..  "tomato_sauce", PREFIX ..  "tomato_sauce"}, 
-        {PREFIX ..  "dough", PREFIX ..  "dough", PREFIX ..  "dough"}, 
+        {"", "mcl_farming:potato_item", ""},
+        {"mcl_farming:potato_item", "mcl_farming:potato_item", "mcl_farming:potato_item"},      
+        {"", "mcl_farming:potato_item", ""},
+    },
+})
+core.register_craft({
+    output = PREFIX ..  "ice_cream",
+    recipe = {
+        {"mcl_core:sugar","mcl_core:ice", "mcl_core:sugar"},
+        {"", "mcl_cocoas:cocoa_beans", ""},      
+        {"", PREFIX ..  "cone", ""},
     },
 })
 core.register_craft({
@@ -27,83 +88,9 @@ core.register_craft({
 core.register_craft({
     output = PREFIX ..  "mushroom_pizza",
     recipe = {
-        {"", "mcl_mushrooms:mushroom_brown", ""},   
+        {"mcl_mushrooms:mushroom_brown", "mcl_mushrooms:mushroom_brown", "mcl_mushrooms:mushroom_brown"},   
         {"", PREFIX ..  "pizza", ""}, 
         {"", "", ""}, 
-    },
-})
-core.register_craft({
-	output = PREFIX ..  "spaghetti",
-	recipe = {
-        {"", PREFIX ..  "tomato_sauce", ""}, 
-        {"", PREFIX ..  "spaghetti_raw", ""}, 
-        {"", "", ""}, 
-    },
-})
-core.register_craft({
-	output = PREFIX ..  "bruschetta",
-	recipe = {
-        {"", PREFIX ..  "tomato", ""}, 
-        {"", "mcl_farming:bread", ""}, 
-        {"", "", ""}, 
-    },
-})
-core.register_craft({
-	output = PREFIX ..  "tomato_sauce_bruschetta",
-	recipe = {
-        {"", PREFIX ..  "tomato_sauce", ""}, 
-        {"", PREFIX ..  "bruschetta", ""}, 
-        {"", "", ""}, 
-    },
-})
-core.register_craft({
-	output = PREFIX ..  "pesto_bruschetta",
-	recipe = {
-        {"", PREFIX ..  "pesto_sauce", ""}, 
-        {"", PREFIX ..  "bruschetta", ""}, 
-        {"", "", ""}, 
-    },
-})
-core.register_craft({
-    output = PREFIX ..  "tiramisu",
-    recipe = {
-        {"mcl_cocoas:cocoa_beans", "mcl_core:sugar", "mcl_cocoas:cocoa_beans"},
-		{PREFIX ..  "coffee", "mcl_throwing:egg", PREFIX ..  "coffee"},      
-        {"", "", ""},
-    },
-})
-
-core.register_craft({
-    output = PREFIX ..  "gnocco_raw",
-    recipe = {
-        {"", "mcl_farming:potato_item", ""},
-        {"mcl_farming:potato_item", "mcl_farming:potato_item", "mcl_farming:potato_item"},      
-        {"", "mcl_farming:potato_item", ""},
-    },
-})
-
-core.register_craft({
-    output = PREFIX ..  "tomato_sauce",
-    recipe = {
-        {"",PREFIX ..  "tomato", ""},
-        {"", "mcl_potions:glass_bottle", ""},      
-        {"", "", ""},
-    },
-})
-core.register_craft({
-    output = PREFIX ..  "pesto_sauce",
-    recipe = {
-        {"",PREFIX ..  "basil", ""},
-        {"", "mcl_potions:glass_bottle", ""},      
-        {"", "", ""},
-    },
-})
-core.register_craft({
-    output = PREFIX ..  "sunflowerolio",
-    recipe = {
-        {"","mcl_flowers:sunflower", ""}, 
-        {"", "mcl_potions:glass_bottle", ""},     
-        {"", "", ""},
     },
 })
 core.register_craft({
@@ -115,40 +102,10 @@ core.register_craft({
     },
 })
 core.register_craft({
-    output = PREFIX ..  "coffee",
+    output = PREFIX ..  "panettone",
     recipe = {
-        {"",PREFIX ..  "coffee_roasted_bean", ""},
-        {"", "mcl_potions:glass_bottle", ""},      
-        {"", "", ""},
-    },
-})
-core.register_craft({
-    output = PREFIX ..  "sugar_coffee",
-    recipe = {
-        {"","mcl_core:sugar", ""},
-        {"", PREFIX ..  "coffee", ""},      
-        {"", "", ""},
-    },
-})
-
-core.register_craft({
-	type = "cooking",
-	output = PREFIX ..  "coffee_roasted_bean",                                
-	recipe = PREFIX ..  "coffee_bean",
-})
-core.register_craft({
-    output = PREFIX ..  "ice_cream",
-    recipe = {
-        {"mcl_core:sugar","mcl_core:ice", "mcl_core:sugar"},
-        {"", "mcl_cocoas:cocoa_beans", ""},      
-        {"", PREFIX ..  "cone", ""},
-    },
-})
-core.register_craft({
-    output = PREFIX ..  "cone",
-    recipe = {
-        {"","mcl_core:sugar", ""},
-        {"", "mcl_mobitems:milk_bucket", ""},      
+        {"","mcl_cocoas:cocoa_beans", ""},
+        {"", PREFIX ..  "dough", ""},    
         {"", "mcl_throwing:egg", ""},
     },
 })
@@ -161,11 +118,19 @@ core.register_craft({
     },
 })
 core.register_craft({
-    output = PREFIX ..  "panettone",
+    output = PREFIX ..  "pesto_bruschetta",
     recipe = {
-        {"","mcl_cocoas:cocoa_beans", ""},
-        {"", PREFIX ..  "dough", ""},    
-        {"", "mcl_throwing:egg", ""},
+        {"", PREFIX ..  "pesto_sauce", ""}, 
+        {"", PREFIX ..  "bruschetta", ""}, 
+        {"", "", ""}, 
+    },
+})
+core.register_craft({
+    output = PREFIX ..  "pesto_sauce",
+    recipe = {
+        {"",PREFIX ..  "basil", ""},
+        {"", "mcl_potions:glass_bottle", ""},      
+        {"", "", ""},
     },
 })
 core.register_craft({
@@ -177,40 +142,62 @@ core.register_craft({
     },
 })
 core.register_craft({
-    output = PREFIX ..  "cannoli",
-    recipe = {
-        {"","mcl_cocoas:cocoa_beans", ""},
-        {"", PREFIX ..  "dough", ""},
-        {"", "mcl_throwing:egg", ""},
+    output = PREFIX ..  "spaghetti",
+	recipe = {
+        {"", PREFIX ..  "tomato_sauce", ""}, 
+        {"", PREFIX ..  "spaghetti_raw", ""}, 
+        {"", "", ""}, 
     },
 })
--- RECETAS DE CRAFTEO DE TOMATE Y ALBAHACA DE DIAMANTE
 core.register_craft({
-    output = PREFIX .. "diamond_tomato",
+    output = PREFIX ..  "sugar_coffee",
     recipe = {
-        {"mcl_core:diamond", "", "mcl_core:diamond"},
-        {"", PREFIX .. "tomato",  ""},
-        {"mcl_core:diamond", "", "mcl_core:diamond"},
+        {"","mcl_core:sugar", ""},
+        {"", PREFIX ..  "coffee", ""},      
+        {"", "", ""},
     },
 })
-
 core.register_craft({
-    output = PREFIX .. "diamond_basil",
+    output = PREFIX ..  "sunflowerolio",
     recipe = {
-        {"", "mcl_core:diamond", ""},
-        {"mcl_core:diamond", PREFIX .. "basil",   "mcl_core:diamond"},
-        {"", "mcl_core:diamond", ""},
+        {"","mcl_flowers:sunflower", ""}, 
+        {"", "mcl_potions:glass_bottle", ""},     
+        {"", "", ""},
+    },
+})
+core.register_craft({
+    output = PREFIX ..  "tiramisu",
+    recipe = {
+        {"mcl_cocoas:cocoa_beans", "mcl_core:sugar", "mcl_cocoas:cocoa_beans"},
+        {PREFIX ..  "coffee", "mcl_throwing:egg", PREFIX ..  "coffee"},      
+        {"", "", ""},
+    },
+})
+core.register_craft({
+    output = PREFIX ..  "tomato_sauce",
+    recipe = {
+        {"",PREFIX ..  "tomato", ""},
+        {"", "mcl_potions:glass_bottle", ""},      
+        {"", "", ""},
+    },
+})
+core.register_craft({
+	output = PREFIX ..  "tomato_sauce_bruschetta",
+	recipe = {
+        {"", PREFIX ..  "tomato_sauce", ""}, 
+        {"", PREFIX ..  "bruschetta", ""}, 
+        {"", "", ""}, 
     },
 })
 
 -- non-food items
 core.register_craft({
-    output = PREFIX ..  "rolling_pin",
+    output = PREFIX ..  "coffee_sack",
     recipe = {
-        {"", "mcl_core:stick", ""},
-        {"", "mcl_core:stick", ""},
-        {"", "mcl_core:stick", ""},
-    },
+        {"", "mcl_mobitems:string", ""},
+        {PREFIX ..  "coffee_roasted_bean", PREFIX ..  "coffee_roasted_bean", PREFIX ..  "coffee_roasted_bean"},
+        {PREFIX ..  "coffee_roasted_bean", PREFIX ..  "coffee_roasted_bean", PREFIX ..  "coffee_roasted_bean"},
+    }
 })
 core.register_craft({
     output = PREFIX ..  "iron_rolling_pin",
@@ -229,31 +216,10 @@ core.register_craft({
     },
 })
 core.register_craft({
-    output = PREFIX ..  "coffee_sack",
+    output = PREFIX ..  "rolling_pin",
     recipe = {
-        {"", "mcl_mobitems:string", ""},
-        {PREFIX ..  "coffee_roasted_bean", PREFIX ..  "coffee_roasted_bean", PREFIX ..  "coffee_roasted_bean"},
-        {PREFIX ..  "coffee_roasted_bean", PREFIX ..  "coffee_roasted_bean", PREFIX ..  "coffee_roasted_bean"},
-    }
-})
-
---olive wood stuff
-core.register_craft({
-	output = PREFIX ..  "olivewood 4",
-	recipe = {{PREFIX ..  "olivetree"}},
-})
-
-core.register_craft({
-	output = PREFIX ..  "olivewood 4",
-	recipe = {{PREFIX ..  "stripped_olivetree"}},
-})
-
-core.register_craft({
-	output = PREFIX ..  "olivewood 3",
-	recipe = {{PREFIX ..  "olivetree_bark"}},
-})
-
-core.register_craft({
-	output = PREFIX ..  "olivewood 3",
-	recipe = {{PREFIX ..  "stripped_olivetree_bark"}},
-})
+        {"", "mcl_core:stick", ""},
+        {"", "mcl_core:stick", ""},
+        {"", "mcl_core:stick", ""},
+    },
+})  

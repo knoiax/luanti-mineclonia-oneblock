@@ -35,4 +35,71 @@ core.register_craft({
 	},
 })
 
+--pizzas
+core.register_craft({
+    output = PREFIX ..  "pizza_raw",
+    recipe = {
+        {IF_PREFIX ..  "mozzarella" , IF_PREFIX ..  "mozzarella", IF_PREFIX ..  "mozzarella"}, 
+        {IF_PREFIX ..  "tomato_sauce", IF_PREFIX ..  "tomato_sauce", IF_PREFIX ..  "tomato_sauce"}, 
+        {IF_PREFIX ..  "dough", IF_PREFIX ..  "dough", IF_PREFIX ..  "dough"}, 
+    },
+})
+core.register_craft({
+    output = PREFIX ..  "olive_pizza_raw",
+    recipe = {
+        {IF_PREFIX ..  "olive", IF_PREFIX ..  "olive", IF_PREFIX ..  "olive"},   
+        {"", PREFIX ..  "pizza_raw", ""}, 
+        {"", "", ""}, 
+    },
+})
+core.register_craft({
+    output = PREFIX ..  "mushroom_pizza_raw",
+    recipe = {
+        {"mcl_mushrooms:mushroom_brown", "mcl_mushrooms:mushroom_brown", "mcl_mushrooms:mushroom_brown"},   
+        {"", PREFIX ..  "pizza_raw", ""}, 
+        {"", "", ""}, 
+    },
+})
+core.register_craft({
+    output = PREFIX ..  "margherita_pizza_raw",
+    recipe = {
+        {IF_PREFIX ..  "basil", IF_PREFIX ..  "basil", IF_PREFIX ..  "basil"},   
+        {"", PREFIX ..  "pizza_raw", ""}, 
+        {"", "", ""}, 
+    },
+})
+core.register_craft({
+    output = PREFIX ..  "capricious_egg_pizza_raw",
+    recipe = {
+        {"mcl_throwing:egg", "mcl_throwing:egg", "mcl_throwing:egg"},   
+        {"", PREFIX ..  "pizza_raw", ""}, 
+        {"", "", ""}, 
+    },
+})
+core.register_craft({
+	type = "cooking",
+    output = PREFIX ..  "pizza",
+    recipe = PREFIX ..  "pizza_raw",
+})
+core.register_craft({
+	type = "cooking",
+    output = PREFIX ..  "olive_pizza",
+    recipe = PREFIX ..  "olive_pizza_raw",
+})
+core.register_craft({
+	type = "cooking",
+    output = PREFIX ..  "mushroom_pizza",
+    recipe = PREFIX ..  "mushroom_pizza_raw",
+})
+core.register_craft({
+	type = "cooking",
+    output = PREFIX ..  "margherita_pizza",
+    recipe = PREFIX ..  "margherita_pizza_raw",
+})
+core.register_craft({
+	type = "cooking",
+    output = PREFIX ..  "capricious_egg_pizza",
+    recipe = PREFIX ..  "capricious_egg_pizza_raw",
+})
+
 --"mcl_crafting_table:crafting_table"
