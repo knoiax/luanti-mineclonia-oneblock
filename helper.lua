@@ -59,12 +59,11 @@ end
 --=====================================
 --Registro de Pizzas
 --=====================================
--- Función auxiliar para registrar la familia completa de nodos de cualquier pizza,
--- soportando prefijos independientes para el nodo y para su slice correspondiente.
+-- Función auxiliar para registrar la familia completa de nodos de cualquier pizza usando modelos 3D (.obj)
 function mcl_eodp.register_pizza_family(pizza_key, description, slice_item_full_name, custom_node_prefix)
     local PREFIX = custom_node_prefix or mcl_eodp.prefix.de_papi
     
-    -- Node box con grosor preciso de 2 píxeles (0.125 de altura)
+    -- Caja de selección y colisión fija (grosor de 2 píxeles, de -0.5 a -0.375 en Y)
     local pizza_node_box = {
         type = "fixed",
         fixed = { {-0.5, -0.5, -0.5, 0.5, -0.375, 0.5} }
@@ -82,24 +81,31 @@ function mcl_eodp.register_pizza_family(pizza_key, description, slice_item_full_
     for i = 8, 1, -1 do
         local node_name = (i == 8) and (PREFIX .. pizza_key) or (PREFIX .. pizza_key .. "_" .. i)
         
-        -- Textura real existente en tus assets
-        local texture = (i == 8) and ("eodp_node_" .. pizza_key .. ".png") 
-                                  or ("eodp_node_" .. pizza_key .. "_" .. i .. ".png")
+        -- Asignar el archivo .obj correspondiente a cada estado de consumo (eodp_pizza_1.obj a eodp_pizza_8.obj)
+        local mesh_file = "eodp_pizza_" .. i .. ".obj"
+        
+        -- Textura unificada mapeada en el .obj (aquí declaramos la línea unificada para el modelo 3D)
+        local bottom_texture = "eodp_pizza_node_down.png"
+        
+        local top_texture = ("eodp_node_" .. pizza_key .. "_" .. i .. ".png")
         
         local desc = (i == 8) and description or (description .. " (" .. i .. "/8 porciones)")
 
         minetest.register_node(node_name, {
             description = desc,
-            drawtype = "nodebox",
-            -- Al pasar un solo string en tiles, Minetest aplica esta textura existente a todas las caras
-            tiles = { texture },
+            drawtype = "mesh",
+            mesh = mesh_file,
+            tiles = {
+                top_texture,     -- [Índice 2] Textura de la pizza / porción
+                bottom_texture, -- [Índice 1] eodp_pizza_node_down.png
+            },
             inventory_image = "eodp_node_" .. pizza_key .. ".png",
             wield_image = "eodp_node_" .. pizza_key .. ".png",
             paramtype = "light",
             paramtype2 = "facedir",
-            use_texture_alpha = "clip", -- Recorta la transparencia exterior dejando la forma circular limpia
-            node_box = pizza_node_box,
+            use_texture_alpha = "clip",
             selection_box = pizza_node_box,
+            collision_box = pizza_node_box,
             stack_max = 1,
             drop = "",
             sounds = mcl_sounds.node_sound_wood_defaults(),
@@ -139,7 +145,6 @@ function mcl_eodp.register_pizza_family(pizza_key, description, slice_item_full_
         })
     end
 end
-
 
 -- helper.lua - Encapsulación y Diagnóstico
 local OneBlockHelper = {}
