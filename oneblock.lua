@@ -34,18 +34,53 @@ end
 local function get_current_phase(blocks_mined, dimension)
     for _, phase in ipairs(phases) do
         if dimension == phase.dimension then
-            if blocks_mined >= phase.min_blocks and blocks_mined <= phase.max_blocks then
+            local max_b = phase.max_blocks or math.huge
+            if blocks_mined >= phase.min_blocks and blocks_mined <= max_b then
                 return phase
             end
         end  
     end
-    -- Si supera la última fase definida, retorna la última de esa dimensión
-    for i = #phases, 1, -1 do
-        if phases[i].dimension == dimension then
-            return phases[i]
+    -- Fallback por seguridad
+    return phases[1]
+end
+
+-- Función auxiliar para procesar tablas (global_ow_items y phase.items)
+-- Filtrar elementos si es Fase 1 y aún no se alcanza el bloque 100
+local available_items = {}
+local blocks_mined = storage:get_int("blocks_mined_overworld") or 0
+local last_animal_block = storage:get_int("last_animal_block") or 0
+local last_hostile_block = storage:get_int("last_hostile_block") or 0
+local last_lava_ow_block = storage:get_int("last_lava_ow_block") or 0
+local last_water_block = storage:get_int("last_water_block") or 0
+local function process_items(items_table)
+    if not items_table then return end
+    for _, item in ipairs(items_table) do
+        local include = true
+        if item.type == "mob" then
+            -- Requiere >= 100 bloques Y que hayan pasado al menos 20 bloques desde el último animal
+            if blocks_mined < 100 or (blocks_mined - last_animal_block < 20) then
+                include = false
+            end
+        elseif item.type == "hostile_mob" then
+            -- Requiere >= 200 bloques Y que hayan pasado al menos 50 bloques desde el último hostil
+            if blocks_mined < 200 or (blocks_mined - last_hostile_block < 50) then
+                include = false
+            end
+        elseif item.type == "lava" then
+            -- Requiere >= 400 bloques y que hayan pasado al menos 50 bloques desde el último bloque
+            if blocks_mined < 400 or (blocks_mined - last_lava_ow_block < 50) then
+                include = false
+            end            
+        elseif item.type == "water" then
+            -- Requiere >= 75 bloques y que hayan pasado al menos 30 bloques desde el último bloque
+            if blocks_mined < 75 or (blocks_mined - last_water_block < 30) then
+                include = false
+            end            
+        end
+        if include then
+            table.insert(available_items, item)
         end
     end
-    return phases[1]
 end
 
 -- Función para evitar caídas SOLO si el jugador está parado sobre el bloque picado
@@ -213,7 +248,6 @@ minetest.register_on_dignode(function(pos, oldnode, digger)
 
     -- A. ONEBLOCK OVERWORLD
     if pos.x == OVERWORLD_POS.x and pos.y == OVERWORLD_POS.y and pos.z == OVERWORLD_POS.z then
-        local blocks_mined = storage:get_int("blocks_mined_overworld") or 0
         blocks_mined = blocks_mined + 1
         storage:set_int("blocks_mined_overworld", blocks_mined)
 
@@ -229,8 +263,12 @@ minetest.register_on_dignode(function(pos, oldnode, digger)
             end
         end
 
+        -- Procesar tanto los ítems globales como los de la fase actual
+        process_items(phases.global_ow_items)
+        process_items(current_phase.items)
+
         -- Seleccionar ítem según los pesos de phases.lua
-        local selected = choose_weighted(current_phase.items, pr)
+        local selected = choose_weighted(available_items, pr)
         local next_node = "mcl_core:dirt"
 
         if selected then
@@ -248,15 +286,42 @@ minetest.register_on_dignode(function(pos, oldnode, digger)
                 storage:set_int("chest_count", chest_count)
                 local is_special = (chest_count % 4 == 0)
 
-                -- Poblar el cofre usando chests.lua (pasando posición, índice y si es especial)
-                if chests_manager and chests_manager.populate then
-                    chests_manager.populate(OVERWORLD_POS, current_phase_index, is_special)
-                end
+                local captured_pos = vector.new(OVERWORLD_POS)
+                local captured_phase = current_phase_index
+                local captured_special = is_special
+
+                minetest.after(0, function()
+                    if chests_manager and chests_manager.populate then
+                        chests_manager.populate(captured_pos, captured_phase, captured_special)
+                    end
+                end)
                 
             elseif selected.type == "mob" then
                 next_node = "mcl_core:dirt"
                 minetest.set_node(OVERWORLD_POS, {name = next_node})
                 minetest.add_entity({x = pos.x, y = pos.y + 1, z = pos.z}, selected.name)
+
+                -- Guardamos el bloque actual para activar el cooldown de 20 bloques en animales
+                storage:set_int("last_animal_block", blocks_mined)
+
+            elseif selected.type == "hostile_mob" then
+                next_node = "mcl_core:dirt"
+                minetest.set_node(OVERWORLD_POS, {name = next_node})
+                minetest.add_entity({x = pos.x, y = pos.y + 1, z = pos.z}, selected.name)
+                
+                -- Guardamos el bloque actual para activar el cooldown de 50 bloques en hostiles
+                storage:set_int("last_hostile_block", blocks_mined)
+            elseif selected.type == "lava" then
+                next_node = "mcl_core:lava_source"
+                minetest.set_node(OVERWORLD_POS, {name = next_node})
+                
+                -- Guardamos el bloque actual para activar el cooldown de 50 bloques en hostiles
+                storage:set_int("last_lava_ow_block", blocks_mined)
+            elseif selected.type == "water" then
+                next_node = "mcl_core:water_source"
+                minetest.set_node(OVERWORLD_POS, {name = next_node})
+                -- Guardamos el bloque actual para activar el cooldown de 30 bloques en hostiles
+                storage:set_int("last_water_block", blocks_mined)
             end
         end
 

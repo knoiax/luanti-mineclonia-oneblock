@@ -85,8 +85,6 @@ function mcl_eodp.register_pizza_family(pizza_key, description, slice_item_full_
         local mesh_file = "eodp_pizza_" .. i .. ".obj"
         
         -- Textura unificada mapeada en el .obj (aquí declaramos la línea unificada para el modelo 3D)
-        local bottom_texture = "eodp_pizza_node_down.png"
-        
         local top_texture = ("eodp_node_" .. pizza_key .. "_" .. i .. ".png")
         
         local desc = (i == 8) and description or (description .. " (" .. i .. "/8 porciones)")
@@ -97,7 +95,6 @@ function mcl_eodp.register_pizza_family(pizza_key, description, slice_item_full_
             mesh = mesh_file,
             tiles = {
                 top_texture,     -- [Índice 2] Textura de la pizza / porción
-                bottom_texture, -- [Índice 1] eodp_pizza_node_down.png
             },
             inventory_image = "eodp_node_" .. pizza_key .. ".png",
             wield_image = "eodp_node_" .. pizza_key .. ".png",
@@ -143,6 +140,33 @@ function mcl_eodp.register_pizza_family(pizza_key, description, slice_item_full_
                 minetest.sound_play("mcl_eating_eat", {pos = pos, gain = 0.8}, true)
             end,
         })
+    end
+end
+
+-- Función auxiliar para colocar el fluido temporalmente y consumir el ítem sin dejar rastro
+function mcl_eodp.place_temporary_fluid(node_name)
+    return function(itemstack, placer, pointed_thing)
+        if pointed_thing.type ~= "node" then
+            return itemstack
+        end
+
+        -- Obtener la posición adyacente donde se colocará el fluido
+        local pos = pointed_thing.above
+        local node_under = minetest.get_node(pos)
+
+        -- Validar si el espacio está libre o es reemplazable (como aire)
+        if minetest.registered_nodes[node_under.name] and minetest.registered_nodes[node_under.name].buildable_to then
+            minetest.set_node(pos, {name = node_name})
+            
+            -- Opcional: Sonido de vaciado de cubo
+            minetest.sound_play("mcl_buckets_fill_water", {pos = pos, gain = 0.5}, true)
+
+            -- Consumir el ítem por completo (NO devuelve cubo vacío)
+            itemstack:take_item(1)
+            return itemstack
+        end
+
+        return itemstack
     end
 end
 

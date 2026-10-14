@@ -33,7 +33,7 @@ dofile(modpath .. "/eodp_food.lua")
 dofile(modpath .. "/eodp_crafting.lua")
 dofile(modpath .. "/villager_trades.lua")
 dofile(modpath .. "/wandering_trader_trades.lua")
-dofile(modpath .. "/anti_cheat.lua")
+--dofile(modpath .. "/anti_cheat.lua")
 
 
 -- Integracion de modulos de terceros

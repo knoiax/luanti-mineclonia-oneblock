@@ -158,7 +158,7 @@ core.register_craft({
     },
 })
 core.register_craft({
-    output = PREFIX ..  "sunflowerolio",
+    output = PREFIX ..  "sunfloweroil",
     recipe = {
         {"","mcl_flowers:sunflower", ""}, 
         {"", "mcl_potions:glass_bottle", ""},     

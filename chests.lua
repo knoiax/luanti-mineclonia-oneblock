@@ -36,11 +36,16 @@ chests.loot_tables = {
             { name = "mcl_flowers:dandelion", count = 1, chance = 0.6 },
             { name = "mcl_flowers:poppy", count = 1, chance = 0.2 },
             { name = "mcl_tools:axe_wood", count = 1, chance = 0.2 },
+            { name = "mcl_tools:pick_wood", count = 1, chance = 0.2 },
+            { name = "mcl_mangrove:propagule_clay", count = 1, chance = 0.3 },
             { name = "mcl_mobitems:gunpowder", count = {min = 1, max = 5}, chance = 0.6 },
             { name = "mcl_mobitems:string", count = {min = 1, max = 4}, chance = 0.6 },
             { name = "mcl_trees:sapling_oak", count = {min = 1, max = 4}, chance = 0.3 },
             { name = "mcl_trees:sapling_birch", count = {min = 1, max = 4}, chance = 0.3 },
             { name = "mcl_trees:sapling_dark_oak", count = {min = 1, max = 4}, chance = 0.3 },
+            { name = PREFIX .. "temp_water_bucket", count = 1, chance = 0.3 },
+            { name = PREFIX .. "temp_lava_bucket", count = 1, chance = 0.15 },
+
         },
         special = {
             { name = "mcl_core:carrot", count = {min = 1, max = 2}, chance = 0.6 },
@@ -75,13 +80,20 @@ chests.loot_tables = {
         },
     },
     [3] = {
-        description = "Cofre Fase 2: Minerales Iniciales",
+        description = "Cofre Fase 3: Minerales Iniciales",
         standard = {
             { name = "mcl_core:iron_nugget", count = {min = 1, max = 2}, chance = 0.4 },
             { name = "mcl_farming:carrot", count = {min = 1, max = 3}, chance = 0.4 },
             { name = "mcl_farming:potato", count = {min = 1, max = 3}, chance = 0.4 },
             { name = "mcl_core:coal_lump", count = {min = 2, max = 4}, chance = 0.6 },
-            { name = "mcl_buckets:bucket_water", count = 1, chance = 0.2 },
+        },
+    },
+    [7] = {
+        description = "Cofre Fase 7: nether 1",
+        standard = {
+            { name = "mcl_crimson:crimson_fungus", count = {min = 1, max = 2}, chance = 0.4 },
+            { name = "mcl_crimson:warped_fungus", count = {min = 1, max = 2}, chance = 0.4 },
+            { name = "mcl_nether:nether_wart", count = {min = 1, max = 2}, chance = 0.4 },
         },
     },
     -- Nuevas fases o expansiones hechas por terceros se pueden añadir fácilmente aquí

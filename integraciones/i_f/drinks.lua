@@ -47,7 +47,7 @@ end)
 register_bottled_item("olive_oil", "Olive Oil", 1.0, 2)
 
 -- Aceite de girasol
-register_bottled_item("sunflowerolio", "Sunflower Oil", 1.0, 2)
+register_bottled_item("sunfloweroil", "Sunflower Oil", 1.0, 2)
 
 -- Salsa de tomate
 register_bottled_item("tomato_sauce", "Tomato Sauce", 2.0, 4)
