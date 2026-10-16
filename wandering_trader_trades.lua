@@ -31,15 +31,15 @@ minetest.register_on_mods_loaded(function()
             -- Albahaca de Diamante
             { { "mcl_core:emerald", 5, 5 }, { PREFIX .. "diamond_basil", 1, 1 }, 4, 5 },
             -- Semillas de Albahaca
-            { { "mcl_core:emerald", 1, 1 }, { IF_PREFIX .. "basil_seeds", 1, 1 }, 12, 1 },
+            --{ { "mcl_core:emerald", 1, 1 }, { IF_PREFIX .. "basil_seeds", 1, 1 }, 12, 1 },
             -- Semillas de Tomate
-            { { "mcl_core:emerald", 1, 1 }, { IF_PREFIX .. "tomato_plant_seeds", 1, 1 }, 12, 1 },
+            --{ { "mcl_core:emerald", 1, 1 }, { IF_PREFIX .. "tomato_plant_seeds", 1, 1 }, 12, 1 },
             -- Leche de Oveja
-            { { "mcl_core:emerald", 3, 3 }, { IF_PREFIX .. "sheep_milk_bucket", 1, 1 }, 6, 3 },
+            --{ { "mcl_core:emerald", 3, 3 }, { IF_PREFIX .. "sheep_milk_bucket", 1, 1 }, 6, 3 },
             -- Brote de Limonero
-            { { "mcl_core:emerald", 5, 5 }, { PREFIX .. "lemonsapling", 1, 1 }, 8, 5 },
+            --{ { "mcl_core:emerald", 5, 5 }, { "mcl_trees:sapling_lemon", 1, 1 }, 8, 5 },
             -- Brote de Olivo
-            { { "mcl_core:emerald", 5, 5 }, { IF_PREFIX .. "olivesapling", 1, 1 }, 8, 5 },
+            --{ { "mcl_core:emerald", 5, 5 }, { "mcl_trees:sapling_olive", 1, 1 }, 8, 5 },
         }
 
         -- Convertimos las tablas a objetos de trueque válidos de Mineclonia

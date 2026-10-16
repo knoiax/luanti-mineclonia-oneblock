@@ -129,6 +129,7 @@ minetest.register_craftitem(PREFIX .. "temp_wooden_bucket", {
     inventory_image = "eodp_wooden_bucket.png",
     wield_image = "eodp_wooden_bucket.png",
     stack_max = 1,
+    pointabilities = { nodes = { ["group:liquid_source"] = true } },
     groups = { not_in_creative_inventory = 1 },
     on_place = function(itemstack, placer, pointed_thing)
         if pointed_thing.type ~= "node" then
@@ -193,6 +194,7 @@ minetest.register_craftitem(PREFIX .. "temp_stone_bucket", {
     inventory_image = "eodp_stone_bucket.png",
     wield_image = "eodp_stone_bucket.png",
     stack_max = 1,
+    pointabilities = { nodes = { ["group:liquid_source"] = true } },
     groups = { not_in_creative_inventory = 1 },
     on_place = function(itemstack, placer, pointed_thing)
         if pointed_thing.type ~= "node" then

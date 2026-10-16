@@ -6,6 +6,7 @@ local S = minetest.get_translator(modname)
 -- 1. Carga de módulos externos limpios
 local phases = dofile(modpath .. "/phases.lua")
 local chests_manager = dofile(modpath .. "/chests.lua")
+chests_manager.phases = phases
 local storage = minetest.get_mod_storage()
 
 local OVERWORLD_POS = {x = 0, y = 10, z = 0}
@@ -76,6 +77,15 @@ local function process_items(items_table)
             if blocks_mined < 75 or (blocks_mined - last_water_block < 30) then
                 include = false
             end            
+        end
+        -- No permitas que un identificador desactualizado de phases.lua
+        -- llegue a set_node/add_entity y detenga el servidor.
+        if (item.type == "node" or item.type == "water" or item.type == "lava")
+                and (not item.name or not minetest.registered_nodes[item.name]) then
+            include = false
+        elseif (item.type == "mob" or item.type == "hostile_mob")
+                and (not item.name or not minetest.registered_entities[item.name]) then
+            include = false
         end
         if include then
             table.insert(available_items, item)
@@ -248,7 +258,9 @@ minetest.register_on_dignode(function(pos, oldnode, digger)
 
     -- A. ONEBLOCK OVERWORLD
     if pos.x == OVERWORLD_POS.x and pos.y == OVERWORLD_POS.y and pos.z == OVERWORLD_POS.z then
-        blocks_mined = blocks_mined + 1
+        -- Leer de mod_storage en cada rotura permite que /eodp_set_count
+        -- actualice también el contador activo durante la sesión.
+        blocks_mined = storage:get_int("blocks_mined_overworld") + 1
         storage:set_int("blocks_mined_overworld", blocks_mined)
 
         -- Buscar fase actual en phases.lua
@@ -262,6 +274,9 @@ minetest.register_on_dignode(function(pos, oldnode, digger)
                 break
             end
         end
+
+        -- Cada sorteo debe partir solo de las opciones de esta fase.
+        available_items = {}
 
         -- Procesar tanto los ítems globales como los de la fase actual
         process_items(phases.global_ow_items)
