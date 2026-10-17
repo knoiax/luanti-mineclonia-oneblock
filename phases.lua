@@ -78,6 +78,8 @@ local phases = {
             { type = "mob", name = "mobs_mc:mooshroom", weight = 2, safe = true },
             { type = "node", name = "mcl_farming:pumpkin", weight = 5},
             { type = "node", name = "mcl_farming:melon", weight = 5},
+            { type = "node", name = "mcl_core:snowblock", weight = 20 },
+            { type = "node", name = "mcl_powder_snow:powder_snow", weight = 8 },
         },
     },
     {
@@ -88,29 +90,12 @@ local phases = {
         items = {
             { type = "node", name = "mcl_core:stone", weight = 20 },
             { type = "node", name = "mcl_core:granite", weight = 15 },
-            { type = "node", name = "mcl_core:snowblock", weight = 20 },
-            { type = "node", name = "mcl_powder_snow:powder_snow", weight = 8 },
             { type = "node", name = "mcl_core:stone_with_coal", weight = 20 },
-            { type = "node", name = "mcl_core:stone_with_lapis", weight = 6 },
             { type = "node", name = "mcl_core:stone_with_iron", weight = 10 },
-            { type = "node", name = "mcl_core:stone_with_gold", weight = 6 },
-            { type = "node", name = "mcl_dripstone:dripstone_block", weight = 2 },
-        },
-    },  
-    {
-        name = "Fase 4: Profundidades y Minerales 2",
-        min_blocks = 600,
-        max_blocks = 799,
-        dimension = "overworld",
-        items = {
-            { type = "node", name = "mcl_core:stone", weight = 15 },
-            { type = "node", name = "mcl_core:granite", weight = 10 },
             { type = "node", name = "mcl_deepslate:deepslate", weight = 10 },
             { type = "node", name = "mcl_deepslate:deepslate_cobbled", weight = 7 },
             { type = "node", name = "mcl_deepslate:deepslate_with_redstone", weight = 5 },
-            { type = "node", name = "mcl_core:stone_with_coal", weight = 10 },
             { type = "node", name = "mcl_core:stone_with_lapis", weight = 9 },
-            { type = "node", name = "mcl_core:stone_with_iron", weight = 10 },
             { type = "node", name = "mcl_core:stone_with_gold", weight = 9 },
             { type = "node", name = "mcl_dripstone:dripstone_block", weight = 5 },
             { type = "hostile_mob", name = "mobs_mc:slime_big", weight = 5 },
@@ -119,9 +104,9 @@ local phases = {
         },
     },
     {
-        name = "Fase 5: Profundidades y Minerales 3",
-        min_blocks = 800,
-        max_blocks = 999,
+        name = "Fase 4: Profundidades y Minerales 2",
+        min_blocks = 600,
+        max_blocks = 799,
         dimension = "overworld",
         items = {
             { type = "node", name = "mcl_core:granite", weight = 5 },
@@ -142,6 +127,15 @@ local phases = {
             { type = "hostile_mob", name = "mobs_mc:slime_big", weight = 5 },
             { type = "hostile_mob", name = "mobs_mc:cave_spider", weight = 8, safe = true },
             { type = "node", name = "mcl_dripstone:dripstone_block", weight = 5 },
+        },
+    },
+    {
+        name = "Fase 5: Biomas y peligros",
+        min_blocks = 800,
+        max_blocks = 999,
+        dimension = "overworld",
+        items = {
+
         },
     },
     {
@@ -177,7 +171,7 @@ local phases = {
     {
         name = "Fase 7 = Descubriendo el Nether",
         min_blocks = 0,
-        max_blocks = 299,
+        max_blocks = 249,
         dimension = "nether",
         items = {
             { type = "node", name = "mcl_blackstone:basalt", weight = 15 },
@@ -186,14 +180,15 @@ local phases = {
             { type = "node", name = "mcl_core:bone_block", weight = 15 },
             { type = "node", name = "mcl_nether:glowstone", weight = 10 },
             { type = "node", name = "mcl_nether:quartz_ore", weight = 25 },
+            { type = "chest", weight = 8 },
 
         }
 
     },
     {
         name = "Fase 8 = Vegetación del Nether",
-        min_blocks = 300,
-        max_blocks = 599,
+        min_blocks = 250,
+        max_blocks = 499,
         dimension = "nether",
         items = {
             { type = "node", name = "mcl_crimson:warped_wart_block", weight = 15 },
@@ -202,14 +197,15 @@ local phases = {
             { type = "node", name = "mcl_crimson:shroomlight", weight = 15 },
             { type = "node", name = "mcl_trees:tree_crimson", weight = 5 },
             { type = "node", name = "mcl_trees:tree_warped", weight = 5 },
+            { type = "chest", weight = 8 },
 
         }
 
     },
     {
         name = "Fase 9 = Fortalezas y Ruinas",
-        min_blocks = 600,
-        max_blocks = 899,
+        min_blocks = 500,
+        max_blocks = 749,
         dimension = "nether",
         items = {
             { type = "node", name = "mcl_nether:nether_brick", weight = 10 },
@@ -219,12 +215,30 @@ local phases = {
             { type = "node", name = "mcl_blackstone:blackstone_chiseled_polished", weight = 10 },
             { type = "node", name = "mcl_blackstone:blackstone_gilded", weight = 10 },
             { type = "node", name = "mcl_nether:ancient_debris", weight = 5 }, -- fuente de netherita
+            { type = "chest", weight = 8 },
         }
 
     },
     {
-        name = "Fase 10 = Continuidad en el Nether",
-        min_blocks = 900,
+        name = "Fase 10 = Explorando el Nether",
+        min_blocks = 750,
+        max_blocks = 999,
+        dimension = "nether",
+        items = {
+            { type = "node", name = "mcl_nether:nether_brick", weight = 10 },
+            { type = "node", name = "mcl_blackstone:basalt_polished", weight = 10 },
+            { type = "node", name = "mcl_blackstone:blackstone_brick_polished_cracked", weight = 10 },
+            { type = "node", name = "mcl_blackstone:blackstone_brick_polished", weight = 10 },
+            { type = "node", name = "mcl_blackstone:blackstone_chiseled_polished", weight = 10 },
+            { type = "node", name = "mcl_blackstone:blackstone_gilded", weight = 10 },
+            { type = "node", name = "mcl_nether:ancient_debris", weight = 5 }, -- fuente de netherita
+            { type = "chest", weight = 12 },
+        }
+
+    },
+    {
+        name = "Fase 11 = Continuidad en el Nether",
+        min_blocks = 1000,
         dimension = "nether",
         items = {
             { type = "node", name = "mcl_blackstone:basalt", weight = 15 },
@@ -246,11 +260,165 @@ local phases = {
             { type = "node", name = "mcl_blackstone:blackstone_chiseled_polished", weight = 10 },
             { type = "node", name = "mcl_blackstone:blackstone_gilded", weight = 10 },
             { type = "node", name = "mcl_nether:ancient_debris", weight = 5 }, -- fuente de netherita
+            { type = "chest", weight = 12 },
         }
 
     },
     -- Aquí puedes seguir añadiendo fases posteriores con mayor dificultad de forma controlada
 }
+
+local function is_chest_only_node(name, def)
+    local groups = def and (def.groups or {}) or {}
+    local is_amethyst_crystal = name and name:match("^mcl_amethyst:.*amethyst.*bud$")
+        or name == "mcl_amethyst:amethyst_cluster"
+    return (groups.attached_node or 0) > 0
+        or (groups.climbable or 0) > 0
+        or not not is_amethyst_crystal
+end
+
+-- La fase 5 completa los biomas del Overworld que no están representados
+-- en las fases anteriores, junto con monstruos de dificultad avanzada.
+minetest.register_on_mods_loaded(function()
+    local phase = phases[5]
+    if not phase or phase.dimension ~= "overworld" then return end
+
+    local already_added = {}
+    for _, item in ipairs(phases.global_ow_items or {}) do
+        if item.name then already_added[item.name] = true end
+    end
+    for index = 1, 4 do
+        for _, item in ipairs(phases[index].items or {}) do
+            if item.name then already_added[item.name] = true end
+        end
+    end
+
+    -- Bloques característicos de biomas y cuevas todavía no incluidos.
+    local biome_nodes = {
+        { "mcl_core:redsand", 12 },
+        { "mcl_core:redsandstone", 12 },
+        { "mcl_core:redsandstonesmooth", 8 },
+        { "mcl_core:redsandstonecarved", 6 },
+        { "mcl_core:redsandstonesmooth2", 6 },
+        { "mcl_core:cactus", 10 },
+        { "mcl_core:deadbush", 6 },
+        { "mcl_mud:mud", 10 },
+        { "mcl_mud:packed_mud", 8 },
+        { "mcl_mud:mud_bricks", 6 },
+        { "mcl_core:clay", 8 },
+        { "mcl_flowers:blue_orchid", 5 },
+        { "mcl_lush_caves:moss", 10 },
+        { "mcl_lush_caves:moss_carpet", 8 },
+        { "mcl_lush_caves:hanging_roots", 6 },
+        { "mcl_lush_caves:cave_vines", 6 },
+        { "mcl_lush_caves:cave_vines_lit", 4 },
+        { "mcl_lush_caves:rooted_dirt", 8 },
+        { "mcl_lush_caves:spore_blossom", 4 },
+        { "mcl_lush_caves:azalea", 6 },
+        { "mcl_lush_caves:azalea_flowering", 4 },
+        { "mcl_lush_caves:dripleaf_small", 5 },
+        { "mcl_lush_caves:dripleaf_big", 4 },
+        { "mcl_sculk:sculk", 8 },
+        { "mcl_sculk:vein", 5 },
+        { "mcl_sculk:catalyst", 3 },
+        { "mcl_sculk:sensor", 3 },
+        { "mcl_sculk:shrieker", 2 },
+        { "mcl_amethyst:amethyst_block", 8 },
+        { "mcl_amethyst:budding_amethyst_block", 3 },
+        { "mcl_amethyst:calcite", 8 },
+        { "mcl_amethyst:amethyst_cluster", 4 },
+        { "mcl_amethyst:small_amethyst_bud", 3 },
+        { "mcl_amethyst:medium_amethyst_bud", 3 },
+        { "mcl_amethyst:large_amethyst_bud", 3 },
+        { "mcl_core:andesite", 8 },
+        { "mcl_core:diorite", 8 },
+        { "mcl_deepslate:tuff", 8 },
+        { "mcl_deepslate:tuff_chiseled", 5 },
+        { "mcl_deepslate:tuff_chiseled_bricks", 5 },
+        { "mcl_core:mycelium", 6 },
+        { "mcl_mushrooms:mushroom_brown", 4 },
+        { "mcl_mushrooms:mushroom_red", 4 },
+    }
+    for _, candidate in ipairs(biome_nodes) do
+        local name, weight = candidate[1], candidate[2]
+        local def = minetest.registered_nodes[name]
+        local groups = def and (def.groups or {}) or {}
+        local is_liquid = def and (def.liquidtype == "source" or def.liquidtype == "flowing")
+        if def and (groups.not_in_creative_inventory or 0) == 0
+                and not is_chest_only_node(name, def)
+                and not is_liquid and not already_added[name] then
+            table.insert(phase.items, { type = "node", name = name, weight = weight })
+            already_added[name] = true
+        end
+    end
+
+    -- No se repiten los monstruos básicos; se excluyen Nether, End y hábitats
+    -- acuáticos. El Wither queda como aparición excepcional de peso muy bajo.
+    local excluded_mobs = {
+        ["mobs_mc:zombie"] = true,
+        ["mobs_mc:baby_zombie"] = true,
+        ["mobs_mc:skeleton"] = true,
+        ["mobs_mc:spider"] = true,
+        ["mobs_mc:cave_spider"] = true,
+        ["mobs_mc:creeper"] = true,
+        ["mobs_mc:charged_creeper"] = true,
+        ["mobs_mc:slime_big"] = true,
+        ["mobs_mc:slime_small"] = true,
+        ["mobs_mc:slime_tiny"] = true,
+        ["mobs_mc:silverfish"] = true,
+        ["mobs_mc:blaze"] = true,
+        ["mobs_mc:ender_dragon"] = true,
+        ["mobs_mc:enderdragon"] = true,
+        ["mobs_mc:endermite"] = true,
+        ["mobs_mc:ghast"] = true,
+        ["mobs_mc:wither"] = true,
+        ["mobs_mc:hoglin"] = true,
+        ["mobs_mc:baby_hoglin"] = true,
+        ["mobs_mc:witherskeleton"] = true,
+        ["mobs_mc:zoglin"] = true,
+        ["mobs_mc:baby_zoglin"] = true,
+        ["mobs_mc:magma_cube_big"] = true,
+        ["mobs_mc:magma_cube_small"] = true,
+        ["mobs_mc:magma_cube_tiny"] = true,
+        ["mobs_mc:piglin"] = true,
+        ["mobs_mc:piglin_brute"] = true,
+        ["mobs_mc:zombified_piglin"] = true,
+        ["mobs_mc:strider"] = true,
+        ["mobs_mc:shulker"] = true,
+        ["mobs_mc:guardian"] = true,
+        ["mobs_mc:guardian_elder"] = true,
+        ["mobs_mc:drowned"] = true,
+        ["mobs_mc:baby_drowned"] = true,
+        ["mobs_mc:dog"] = true,
+        ["mobs_mc:axolotl"] = true,
+        ["mobs_mc:cod"] = true,
+        ["mobs_mc:dolphin"] = true,
+        ["mobs_mc:glow_squid"] = true,
+        ["mobs_mc:pufferfish"] = true,
+        ["mobs_mc:salmon"] = true,
+        ["mobs_mc:squid"] = true,
+        ["mobs_mc:tropical_fish"] = true,
+        ["mobs_mc:turtle"] = true,
+    }
+    local registered_mobs = mcl_mobs and mcl_mobs.registered_mobs or {}
+    local mob_names = {}
+    for name, def in pairs(registered_mobs) do
+        local category = def._spawn_category or ""
+        local aquatic = category:find("water", 1, true) ~= nil or category == "axolotl"
+        if def.type == "monster" and not aquatic and not def.tamed
+                and not excluded_mobs[name] and not already_added[name]
+                and minetest.registered_entities[name] then
+            table.insert(mob_names, name)
+        end
+    end
+    table.sort(mob_names)
+    for _, name in ipairs(mob_names) do
+        table.insert(phase.items, {
+            type = "hostile_mob",
+            name = name,
+            weight = 12,
+        })
+    end
+end)
 
 
 -- Completa automáticamente la fase de continuidad con materiales del Overworld
@@ -292,6 +460,7 @@ minetest.register_on_mods_loaded(function()
     local excluded_mobs = {
         ["mobs_mc:blaze"] = true,
         ["mobs_mc:ender_dragon"] = true,
+        ["mobs_mc:enderdragon"] = true,
         ["mobs_mc:endermite"] = true,
         ["mobs_mc:ghast"] = true,
         ["mobs_mc:hoglin"] = true,
@@ -335,7 +504,8 @@ minetest.register_on_mods_loaded(function()
         local node_def = entry.name and minetest.registered_nodes[entry.name]
         local is_water = entry.type == "water"
             or (node_def and (node_def.groups or {}).water and node_def.groups.water > 0)
-        if not excluded_nodes[entry.name] and not is_water then
+        if not excluded_nodes[entry.name] and not is_water
+                and not is_chest_only_node(entry.name, node_def) then
             table.insert(eligible_items, entry)
             if entry.name then
                 already_added[entry.name] = true
@@ -362,6 +532,7 @@ minetest.register_on_mods_loaded(function()
                 and not excluded_nodes[name] and is_visible
                 and not excluded_node_mods[mod_name]
                 and not is_nether_tree
+                and not is_chest_only_node(name, def)
                 and (not is_liquid or is_supported_source)
                 and not already_added[name] then
             table.insert(registered_names, name)
@@ -417,6 +588,138 @@ minetest.register_on_mods_loaded(function()
             safe = true,
         })
     end
+end)
+
+-- La fase 10 descubre contenido del Nether que falta en las fases 7–9;
+-- la fase 11 reúne el conjunto completo del Nether sin duplicados.
+minetest.register_on_mods_loaded(function()
+    local phase10, phase11 = phases[10], phases[11]
+    if not phase10 or not phase11
+            or phase10.dimension ~= "nether" or phase11.dimension ~= "nether" then
+        return
+    end
+
+    local manual_phase10 = phase10.items or {}
+    phase10.items = {}
+    local phase10_seen = {}
+    local function add_phase10(item)
+        if item.name == "mobs_mc:wither" then return end
+        local key = item.name or item.type
+        if key and not phase10_seen[key] then
+            table.insert(phase10.items, item)
+            phase10_seen[key] = true
+        end
+    end
+
+    for _, item in ipairs(phases.global_nth_items or {}) do add_phase10(item) end
+    for index = 7, 9 do
+        for _, item in ipairs(phases[index].items or {}) do add_phase10(item) end
+    end
+    for _, item in ipairs(manual_phase10) do add_phase10(item) end
+
+    local nether_node_mods = {
+        mcl_blackstone = true,
+        mcl_crimson = true,
+        mcl_nether = true,
+    }
+    local node_names = {}
+    for name, def in pairs(minetest.registered_nodes) do
+        local mod_name = name:match("^([^:]+):")
+        local nether_tree = mod_name == "mcl_trees"
+            and (name:find("crimson", 1, true) or name:find("warped", 1, true))
+        local groups = def.groups or {}
+        local visible = (groups.not_in_creative_inventory or 0) == 0
+        local liquid = def.liquidtype == "source" or def.liquidtype == "flowing"
+        if (nether_node_mods[mod_name] or nether_tree)
+                and visible and not liquid
+                and not is_chest_only_node(name, def)
+                and not phase10_seen[name] then
+            table.insert(node_names, name)
+        end
+    end
+    table.sort(node_names)
+    for _, name in ipairs(node_names) do
+        add_phase10({ type = "node", name = name, weight = 8 })
+    end
+
+    -- Solo mobs del Nether. No se sortea el Wither jefe ni criaturas de agua,
+    -- Overworld o End.
+    local nether_mobs = {
+        ["mobs_mc:blaze"] = true,
+        ["mobs_mc:ghast"] = true,
+        ["mobs_mc:hoglin"] = true,
+        ["mobs_mc:baby_hoglin"] = true,
+        ["mobs_mc:zoglin"] = true,
+        ["mobs_mc:baby_zoglin"] = true,
+        ["mobs_mc:magma_cube_big"] = true,
+        ["mobs_mc:magma_cube_small"] = true,
+        ["mobs_mc:magma_cube_tiny"] = true,
+        ["mobs_mc:piglin"] = true,
+        ["mobs_mc:piglin_brute"] = true,
+        ["mobs_mc:zombified_piglin"] = true,
+        ["mobs_mc:strider"] = true,
+        ["mobs_mc:baby_strider"] = true,
+        ["mobs_mc:witherskeleton"] = true,
+        ["mobs_mc:enderman"] = true,
+    }
+    local nether_biomes = {
+        NetherWastes = true,
+        CrimsonForest = true,
+        WarpedForest = true,
+        SoulSandValley = true,
+        BasaltDeltas = true,
+        ["mcl_levelgen:nether_fortress"] = true,
+    }
+    for _, spawner in ipairs(mcl_mobs and mcl_mobs.registered_spawners or {}) do
+        for _, biome in ipairs(spawner.biomes or {}) do
+            if nether_biomes[biome] and spawner.name
+                    and spawner.name ~= "mobs_mc:wither"
+                    and spawner.name ~= "mobs_mc:enderdragon" then
+                nether_mobs[spawner.name] = true
+                break
+            end
+        end
+    end
+    local registered_mobs = mcl_mobs and mcl_mobs.registered_mobs or {}
+    local mob_names = {}
+    for name in pairs(nether_mobs) do
+        local def = registered_mobs[name]
+        local spawn_category = def and def._spawn_category or ""
+        local is_aquatic = spawn_category:find("water", 1, true) ~= nil
+            or spawn_category == "axolotl"
+        if def and not is_aquatic and def.type ~= "npc"
+                and minetest.registered_entities[name]
+                and not phase10_seen[name] then
+            table.insert(mob_names, name)
+        end
+    end
+    table.sort(mob_names)
+    for _, name in ipairs(mob_names) do
+        local def = registered_mobs[name]
+        add_phase10({
+            type = def.type == "monster" and "hostile_mob" or "mob",
+            name = name,
+            weight = 12,
+            safe = true,
+        })
+    end
+
+    local fusion, fusion_seen = {}, {}
+    local function add_to_fusion(item)
+        if item.name == "mobs_mc:wither" then return end
+        local key = item.name or item.type
+        if key and not fusion_seen[key] then
+            local copy = {}
+            for field, value in pairs(item) do copy[field] = value end
+            table.insert(fusion, copy)
+            fusion_seen[key] = true
+        end
+    end
+    for _, item in ipairs(phases.global_nth_items or {}) do add_to_fusion(item) end
+    for index = 7, 10 do
+        for _, item in ipairs(phases[index].items or {}) do add_to_fusion(item) end
+    end
+    phase11.items = fusion
 end)
 
 return phases

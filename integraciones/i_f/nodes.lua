@@ -2,6 +2,25 @@
 local modname = "eodp_it_f"
 local S = minetest.get_translator(modname)
 local PREFIX = mcl_eodp.prefix.italian_food
+local CHEESE_TIME = 300
+
+local function get_formspec(progress)
+    progress = math.max(0, math.min(1, progress or 0))
+    local percent = math.floor(progress * 100)
+    return table.concat({
+        "formspec_version[4]",
+        "size[8,8]",
+        "label[1,0.5;Sheep milk]",
+        "list[context;input;1,1;1,1;]",
+        "label[4,0.5;Sheep cheese]",
+        "list[context;output;4,1;2,1;]",
+        "label[1,2.3;Fermentation: " .. percent .. "%]",
+        "list[current_player;main;0,3.5;8,4;]",
+        "listring[context;input]",
+        "listring[current_player;main]",
+        "listring[context;output]",
+    })
+end
 
 minetest.register_node(PREFIX .. "cheese_rack", {
     description = S("Cheese Rack"),

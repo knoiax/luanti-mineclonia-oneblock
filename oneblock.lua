@@ -343,6 +343,7 @@ minetest.register_on_dignode(function(pos, oldnode, digger)
         if digger and digger.is_player and digger:is_player() then
             snap_player(digger, OVERWORLD_POS)
         end
+        mcl_eodp.ensure_oneblock_node(OVERWORLD_POS, "mcl_core:dirt")
 
     -- B. ONEBLOCK NETHER
     elseif nether_pos and pos.x == nether_pos.x and pos.y == nether_pos.y and pos.z == nether_pos.z then
@@ -358,6 +359,8 @@ minetest.register_on_dignode(function(pos, oldnode, digger)
 
         local selected = choose_weighted(current_phase.items, pr)
         local next_node = "mcl_nether:netherrack"
+        local spawned_mob
+        local chest_special
 
         if selected then
             if selected.type == "node" then
@@ -367,16 +370,27 @@ minetest.register_on_dignode(function(pos, oldnode, digger)
                 local chest_count = storage:get_int("chest_count") or 0
                 chest_count = chest_count + 1
                 storage:set_int("chest_count", chest_count)
-                local is_special = (chest_count % 4 == 0)
-                if chests_manager and chests_manager.populate then
-                    chests_manager.populate(nether_pos, current_phase_index, is_special)
-                end
+                chest_special = (chest_count % 4 == 0)
+            elseif selected.type == "mob" or selected.type == "hostile_mob" then
+                spawned_mob = selected.name
             end
         end
         minetest.set_node(nether_pos, {name = next_node})
+        if next_node == "mcl_chests:chest" and chests_manager and chests_manager.populate then
+            local captured_pos = vector.new(nether_pos)
+            local captured_phase = current_phase_index
+            local captured_special = chest_special
+            minetest.after(0, function()
+                chests_manager.populate(captured_pos, captured_phase, captured_special)
+            end)
+        end
+        if spawned_mob and minetest.registered_entities[spawned_mob] then
+            minetest.add_entity({x = nether_pos.x, y = nether_pos.y + 1, z = nether_pos.z}, spawned_mob)
+        end
         if digger and digger.is_player and digger:is_player() then
             snap_player(digger, nether_pos)
         end
+        mcl_eodp.ensure_oneblock_node(nether_pos, "mcl_nether:netherrack")
 
     -- C. ONEBLOCK END
     elseif end_pos and pos.x == end_pos.x and pos.y == end_pos.y and pos.z == end_pos.z then
@@ -411,5 +425,6 @@ minetest.register_on_dignode(function(pos, oldnode, digger)
         if digger and digger.is_player and digger:is_player() then
             snap_player(digger, end_pos)
         end
+        mcl_eodp.ensure_oneblock_node(end_pos, "mcl_end:end_stone")
     end
 end)

@@ -173,6 +173,28 @@ end
 -- helper.lua - Encapsulación y Diagnóstico
 local OneBlockHelper = {}
 
+-- Repara el OneBlock si, después del minado y de las callbacks del juego,
+-- la posición quedó vacía. No reemplaza un nodo que sí se haya generado.
+function mcl_eodp.ensure_oneblock_node(pos, fallback_name, delay)
+    if not pos or not fallback_name then return false end
+    if not minetest.registered_nodes[fallback_name] then
+        minetest.log("error", "[mcl_eodp] Nodo de respaldo no registrado: " .. tostring(fallback_name))
+        return false
+    end
+
+    minetest.after(delay or 0.1, function()
+        local node = minetest.get_node_or_nil(pos)
+        if not node or (node.name ~= "air" and node.name ~= "ignore") then return end
+
+        minetest.set_node(pos, {name = fallback_name})
+        minetest.log("warning", string.format(
+            "[mcl_eodp] La posición OneBlock (%d, %d, %d) quedó vacía tras minar; se colocó %s.",
+            pos.x, pos.y, pos.z, fallback_name
+        ))
+    end)
+    return true
+end
+
 -- Función de captura y registro seguro de errores
 function OneBlockHelper.safe_call(fn, context_name, ...)
     local args = {...}
