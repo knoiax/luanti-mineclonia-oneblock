@@ -428,3 +428,152 @@ minetest.register_on_dignode(function(pos, oldnode, digger)
         mcl_eodp.ensure_oneblock_node(end_pos, "mcl_end:end_stone")
     end
 end)
+
+local function find_nether_portal_nodes(pos)
+    local center = vector.round(pos)
+    return minetest.find_nodes_in_area(
+        vector.subtract(center, 8), vector.add(center, 8), {"mcl_portals:portal"})
+end
+
+local function give_nether_recovery_compass(player, nether_pos, portal_pos)
+    local meta = player:get_meta()
+    local inv = player:get_inventory()
+    local compass = ItemStack("mcl_compass:compass_recovery")
+    if compass:is_empty() then
+        minetest.log("error", "[mcl_eodp] No existe mcl_compass:compass_recovery")
+        return
+    end
+
+    -- Mineclonia lee esta metadata del jugador para orientar la brújula.
+    meta:set_string("mcl_compass:recovery_pos", minetest.pos_to_string(nether_pos))
+    if meta:get_int("eodp_nether_compass_received") == 1 then
+        for _, listname in ipairs({"main", "offhand"}) do
+            for i = 1, inv:get_size(listname) do
+                if inv:get_stack(listname, i):get_name() == compass:get_name() then return end
+            end
+        end
+    end
+    if inv:room_for_item("main", compass) then
+        inv:add_item("main", compass)
+        meta:set_int("eodp_nether_compass_received", 1)
+        minetest.chat_send_player(player:get_player_name(), "🧭 [OneBlock] Recibiste una brújula que señala el OneBlock del Nether.")
+        return
+    end
+
+    -- Buscar un espacio apoyado junto al portal, del lado del Nether.
+    portal_pos = portal_pos or minetest.string_to_pos(storage:get_string("nether_portal_pos")) or player:get_pos()
+    local portal_nodes = find_nether_portal_nodes(portal_pos)
+    local portal_floor_y
+    for _, portal_pos in ipairs(portal_nodes) do
+        portal_floor_y = portal_floor_y and math.min(portal_floor_y, portal_pos.y) or portal_pos.y
+    end
+
+    local chest_pos
+    if portal_floor_y then
+        local offsets = {{x=1,z=0}, {x=-1,z=0}, {x=0,z=1}, {x=0,z=-1},
+            {x=2,z=0}, {x=-2,z=0}, {x=0,z=2}, {x=0,z=-2}}
+        for _, portal_pos in ipairs(portal_nodes) do
+            if portal_pos.y == portal_floor_y then
+                for _, offset in ipairs(offsets) do
+                    local candidate = {x=portal_pos.x + offset.x, y=portal_floor_y, z=portal_pos.z + offset.z}
+                    local node = minetest.get_node_or_nil(candidate)
+                    local below = minetest.get_node_or_nil({x=candidate.x, y=candidate.y-1, z=candidate.z})
+                    local def = node and minetest.registered_nodes[node.name]
+                    local below_def = below and minetest.registered_nodes[below.name]
+                    if def and def.buildable_to and below_def and below_def.walkable
+                            and mcl_worlds.pos_to_dimension(candidate) == "nether" then
+                        chest_pos = candidate
+                        break
+                    end
+                end
+            end
+            if chest_pos then break end
+        end
+    end
+    if not chest_pos then
+        minetest.chat_send_player(player:get_player_name(), "[OneBlock] No encontré espacio para el cofre junto al portal del Nether; conserva un espacio libre junto a la salida.")
+        return
+    end
+
+    minetest.set_node(chest_pos, {name = "mcl_chests:chest"})
+    local chest_meta = minetest.get_meta(chest_pos)
+    chest_meta:set_int("eodp_temporary_nether_compass", 1)
+    local chest_inv = chest_meta:get_inventory()
+    chest_inv:set_size("main", 27)
+    chest_inv:add_item("main", compass)
+    meta:set_int("eodp_nether_compass_received", 1)
+    minetest.chat_send_player(player:get_player_name(), "📦 [OneBlock] Inventario lleno: la brújula está en el cofre temporal junto al portal del Nether.")
+end
+
+local function ensure_nether_oneblock(player)
+    if not player or not player:is_player() then return end
+    local pos = player:get_pos()
+    if mcl_worlds.pos_to_dimension(pos) ~= "nether" then return end
+
+    local layout_version = storage:get_int("nether_ob_layout_version")
+    local nether_pos_str = storage:get_string("nether_ob_pos")
+    local nether_pos = nether_pos_str ~= "" and minetest.string_to_pos(nether_pos_str) or nil
+    local portal_nodes = find_nether_portal_nodes(pos)
+    local portal_pos = vector.new(pos)
+    if #portal_nodes > 0 then
+        portal_pos = {x=0, y=pos.y, z=0}
+        for _, node_pos in ipairs(portal_nodes) do
+            portal_pos.x = portal_pos.x + node_pos.x / #portal_nodes
+            portal_pos.z = portal_pos.z + node_pos.z / #portal_nodes
+        end
+        portal_pos = vector.round(portal_pos)
+        storage:set_string("nether_portal_pos", minetest.pos_to_string(portal_pos))
+    else
+        local saved_portal_pos = minetest.string_to_pos(storage:get_string("nether_portal_pos"))
+        if saved_portal_pos then portal_pos = saved_portal_pos end
+    end
+    if not nether_pos or layout_version < 2 then
+        -- El ángulo es aleatorio y el radio horizontal siempre supera 100 nodos.
+        local angle = math.rad(mcl_eodp.pr:next(0, 35999) / 100)
+        local distance = mcl_eodp.pr:next(125, 250)
+        local origin = portal_pos
+        nether_pos = {
+            x = math.floor(origin.x + math.cos(angle) * distance + 0.5),
+            y = math.floor(pos.y),
+            z = math.floor(origin.z + math.sin(angle) * distance + 0.5),
+        }
+        storage:set_string("nether_ob_pos", minetest.pos_to_string(nether_pos))
+        storage:set_int("nether_ob_layout_version", 2)
+        storage:set_int("nether_ob_initialized", 0)
+        minetest.chat_send_player(player:get_player_name(), "🔥 [OneBlock] El desafío del Nether se generó en una ubicación aleatoria, a más de 100 bloques de la entrada.")
+    end
+
+    -- Inicializa también posiciones guardadas por la versión anterior, que
+    -- podía dejar el punto sin bloque si el mapa no devolvía aire.
+    if storage:get_int("nether_ob_initialized") ~= 1 then
+        local target = vector.new(nether_pos)
+        minetest.emerge_area(vector.subtract(target, 2), vector.add(target, 2), function(_, _, remaining)
+            if remaining > 0 then return end
+            minetest.set_node(target, {name = "mcl_nether:netherrack"})
+            local below = {x=target.x, y=target.y-1, z=target.z}
+            local below_node = minetest.get_node_or_nil(below)
+            if below_node and (below_node.name == "air" or below_node.name == "mcl_core:void") then
+                minetest.set_node(below, {name = "mcl_core:bedrock"})
+            end
+            storage:set_int("nether_ob_initialized", 1)
+            if player and player:is_player() then
+                give_nether_recovery_compass(player, target, portal_pos)
+            end
+        end)
+        return
+    end
+
+    give_nether_recovery_compass(player, nether_pos, portal_pos)
+end
+
+-- Usar el cambio de dimensión de Mineclonia evita depender de rangos Y fijos.
+mcl_worlds.register_on_dimension_change(function(player, dimension)
+    if dimension == "nether" then ensure_nether_oneblock(player) end
+end)
+
+-- También cubre jugadores que ya estaban dentro del Nether al reiniciar el servidor.
+minetest.register_on_joinplayer(function(player)
+    minetest.after(1, function(p)
+        if p and p:is_player() then ensure_nether_oneblock(p) end
+    end, player)
+end)
