@@ -289,35 +289,71 @@ function chests.populate(pos, phase_index, is_special)
     if not pool then
         pool = loot_data.standard or {}
     end
+    local valid_pool = {}
+    for _, loot in ipairs(pool) do
+        if loot.name and not ItemStack(loot.name):is_empty() then
+            table.insert(valid_pool, loot)
+        end
+    end
 
-    -- Llenar el inventario aleatoriamente
-    local items_to_add = is_special and math.random(6, 9) or math.random(4, 6)
-    for i = 1, items_to_add do
-        if #pool > 0 then
-            local loot = pool[math.random(#pool)]
-            if math.random() <= (loot.chance or 0.5) then
-                local count = 1
-                if type(loot.count) == "table" then
-                    count = math.random(loot.count.min, loot.count.max)
-                elseif type(loot.count) == "number" then
-                    count = loot.count
-                end
+    -- Llenar un número real de espacios. Los intentos fallidos por chance y
+    -- las colisiones de espacios antes reducían los cofres a 0–2 objetos.
+    local target_items = is_special and math.random(6, 9) or math.random(4, 6)
+    local empty_slots = {}
+    for slot = 1, 27 do
+        if inv:get_stack("main", slot):is_empty() then
+            table.insert(empty_slots, slot)
+        end
+    end
 
-                local stack = ItemStack(loot.name .. " " .. count)
-                if loot.enchant_level and mcl_enchanting
-                        and mcl_enchanting.enchant_randomly
-                        and mcl_enchanting.can_enchant_freshly(stack:get_name())
-                        and not mcl_enchanting.not_enchantable_on_enchanting_table(stack:get_name()) then
-                    local ok, enchanted = pcall(
-                        mcl_enchanting.enchant_randomly,
-                        stack, loot.enchant_level, true, true, true
-                    )
-                    if ok and enchanted then stack = enchanted end
-                end
+    local function add_entry(loot, respect_chance)
+        if not loot or not loot.name or #empty_slots == 0 then return false end
+        if respect_chance and math.random() > (loot.chance or 0.5) then return false end
 
-                local slot = math.random(1, 27)
-                inv:set_stack("main", slot, stack)
-            end
+        local count = 1
+        if type(loot.count) == "table" then
+            count = math.random(loot.count.min, loot.count.max)
+        elseif type(loot.count) == "number" then
+            count = loot.count
+        end
+
+        local stack = ItemStack(loot.name .. " " .. count)
+        if stack:is_empty() then return false end
+        if loot.enchant_level and mcl_enchanting
+                and mcl_enchanting.enchant_randomly
+                and mcl_enchanting.can_enchant_freshly(stack:get_name())
+                and not mcl_enchanting.not_enchantable_on_enchanting_table(stack:get_name()) then
+            local ok, enchanted = pcall(
+                mcl_enchanting.enchant_randomly,
+                stack, loot.enchant_level, true, true, true
+            )
+            if ok and enchanted then stack = enchanted end
+        end
+
+        local slot_index = math.random(#empty_slots)
+        local slot = table.remove(empty_slots, slot_index)
+        inv:set_stack("main", slot, stack)
+        return true
+    end
+
+    local filled = 0
+    local attempts = 0
+    local max_attempts = target_items * 50
+    while filled < target_items and #valid_pool > 0 and #empty_slots > 0 and attempts < max_attempts do
+        attempts = attempts + 1
+        if add_entry(valid_pool[math.random(#valid_pool)], true) then
+            filled = filled + 1
+        end
+    end
+
+    -- Completa los espacios previstos si las probabilidades fueron demasiado
+    -- restrictivas, manteniendo el contenido dentro de la tabla de esa fase.
+    local fallback_attempts = 0
+    while filled < target_items and #valid_pool > 0 and #empty_slots > 0
+            and fallback_attempts < target_items * 5 do
+        fallback_attempts = fallback_attempts + 1
+        if add_entry(valid_pool[math.random(#valid_pool)], false) then
+            filled = filled + 1
         end
     end
 end
@@ -378,9 +414,8 @@ end
 local function is_nether_only_item(name)
     local namespace = name:match("^([^:]+):")
     return namespace == "mcl_nether" or namespace == "mcl_blackstone"
-        or namespace == "mcl_crimson"
-        or (namespace == "mcl_trees"
-            and (name:find("crimson", 1, true) or name:find("warped", 1, true)))
+        or name:find("crimson", 1, true) ~= nil
+        or name:find("warped", 1, true) ~= nil
 end
 
 local function is_end_only_item(name)
@@ -404,6 +439,19 @@ chests.phases = chests.phases or nil
 minetest.register_on_mods_loaded(function()
     local phases = chests.phases
     if not phases then return end
+
+    -- El pool global tampoco debe inyectar objetos del Nether/End en el Overworld.
+    for _, pool in ipairs({
+        chests.global_ow_chests_content.standard or {},
+        chests.global_ow_chests_content.special or {},
+    }) do
+        for index = #pool, 1, -1 do
+            local name = pool[index].name
+            if name and (is_nether_only_item(name) or is_end_only_item(name)) then
+                table.remove(pool, index)
+            end
+        end
+    end
 
     -- Asegura que las cinco exclusiones también se apliquen a entradas manuales.
     for _, loot_data in pairs(chests.loot_tables) do
@@ -481,6 +529,19 @@ minetest.register_on_mods_loaded(function()
         loot_data.standard = loot_data.standard or {}
         loot_data.special = loot_data.special or {}
 
+        -- Las tablas Overworld no pueden contener objetos exclusivos del Nether
+        -- o del End, ni siquiera si una lista automática/manual los agregó.
+        if phase.dimension == "overworld" then
+            for _, pool in ipairs({loot_data.standard, loot_data.special}) do
+                for index = #pool, 1, -1 do
+                    local name = pool[index].name
+                    if name and (is_nether_only_item(name) or is_end_only_item(name)) then
+                        table.remove(pool, index)
+                    end
+                end
+            end
+        end
+
         local known_names = {}
         local special_known_names = {}
         add_pool_names(loot_data.standard, known_names)
@@ -501,7 +562,9 @@ minetest.register_on_mods_loaded(function()
 
         if phase.dimension == "overworld" and phase_index ~= 5 and phase_index ~= 6 then
             for _, name in ipairs(chest_only_nodes) do
-                add_loot_once(loot_data.standard, known_names, name, 1, 0.2)
+                if not is_nether_only_item(name) and not is_end_only_item(name) then
+                    add_loot_once(loot_data.standard, known_names, name, 1, 0.2)
+                end
             end
         end
 
