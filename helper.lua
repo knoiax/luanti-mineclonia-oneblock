@@ -347,4 +347,40 @@ minetest.register_chatcommand("eodp_set_count", {
     end,
 })
 
+-- ====================================================================
+-- Comando de desarrollo para generar estructuras .mts con WorldEdit
+-- ====================================================================
+
+-- 1. Capturamos el nombre y la ruta del mod en el ámbito global del archivo (durante la carga)
+local modname = minetest.get_current_modname()
+local modpath = minetest.get_modpath(modname)
+
+minetest.register_chatcommand("spawn_base", {
+    params = "<nombre_esquematico>",
+    description = "Genera un archivo esquemático .mts en tu posición para editarlo con WorldEdit.",
+    privs = { interact = true },
+    func = function(name, param)
+        if param == "" then
+            return false, "❌ Uso correcto: /spawn_base nombre_del_archivo"
+        end
+
+        local player = minetest.get_player_by_name(name)
+        if not player then return false, "❌ Jugador no encontrado." end
+
+        -- Posición redondeada frente al jugador
+        local pos = vector.round(player:get_pos())
+        
+        -- 2. Usamos la variable 'modpath' capturada previamente arriba
+        local path = modpath .. "/schematics/" .. param .. ".mts"
+
+        -- Colocar el esquemático en el mundo
+        local success = minetest.place_schematic(pos, path, "0", nil, true)
+        if success then
+            return true, "✅ ¡Estructura '" .. param .. "' generada con éxito en " .. minetest.pos_to_string(pos) .. "!"
+        else
+            return false, "❌ Error: No se encontró el archivo .mts en la ruta: " .. path
+        end
+    end,
+})
+
 return OneBlockHelper
