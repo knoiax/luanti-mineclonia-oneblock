@@ -26,6 +26,7 @@ Lemon Tree leaves are grown from Lemon trees.=Le foglie di limone crescono dagli
 Lemon Sapling=Germoglio di limone
 Grows into an Lemon tree under the right conditions.=Cresce in un albero di limone nelle giuste condizioni.
 This is a food item which can be eaten.=Questo è un alimento che può essere mangiato.
+
 # -- pizza
 An unbaked pizza. It looks extremely filling and rich, but eating it raw causes severe food poisoning.=Una pizza cruda. Sembra estremamente ricca e sostanziosa, ma mangiarla cruda provoca una grave intossicazione alimentare.
 Pizza=Pizza
@@ -45,3 +46,15 @@ Capricious Egg Pizza Slice=Trancio di Pizza Capricciosa all'Uovo
 Fragile wooden bucket with water=Secchio di legno fragile con acqua
 Fragile stone cube with lava=Fragile cubo di pietra con lava
 Fragile stone cube with Nether lava=Fragile cubo di pietra con lava del Nether
+
+# -- cranio
+Unbreakable Translucent Crystal Skull=Cristallo traslucido di cranio
+Unbreakable Impenetrable Skull Bone block=Osso indistruttibile del Tempio
+Unbreakable Skull Bone Stairs=Scale di ossa del cranio indistruttibile
+Unbreakable Skull Bone Slab=Lastra di osso del cranio indistruttibile
+Unbreakable Temple Stone Brick=Mattone di pietra del tempio indistruttibile
+Unbreakable Temple Stone Brick Stairs=Scale in mattoni di pietra del tempio indistruttibili
+Unbreakable Temple Stone Brick Slab=Lastra di mattoni in pietra da tempio indistruttibile
+Unbreakable Temple Stone Pressure Plate=Piastra a pressione in pietra del tempio indistruttibile
+Unbreakable Lever of the Fortress=Leva indistruttibile della Fortezza
+Unbreakable and Tamper-Proof Dispenser=Distributore infrangibile e a prova di manomissione
