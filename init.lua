@@ -26,6 +26,7 @@ dofile(modpath .. "/integraciones/i_f/crops.lua")
 
 -- Cargar lógica principal de OneBlock
 dofile(modpath .. "/phases.lua")
+dofile(modpath .. "/eodp_nodes.lua")
 dofile(modpath .. "/chests.lua")
 dofile(modpath .. "/oneblock.lua")
 dofile(modpath .. "/lemon_tree.lua")

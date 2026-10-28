@@ -2,6 +2,7 @@
 local modname = minetest.get_current_modname()
 local modpath = minetest.get_modpath(modname)
 local S = minetest.get_translator(modname)
+local EODP_CHEST = mcl_eodp.prefix.de_papi .. "chest"
 
 -- 1. Carga de módulos externos limpios
 local phases = dofile(modpath .. "/phases.lua")
@@ -292,7 +293,7 @@ minetest.register_on_dignode(function(pos, oldnode, digger)
                 minetest.set_node(OVERWORLD_POS, {name = next_node})
                 
             elseif selected.type == "chest" then
-                next_node = "mcl_chests:chest"
+                next_node = EODP_CHEST
                 minetest.set_node(OVERWORLD_POS, {name = next_node})
                 
                 -- Control de cofre especial (cada 4 cofres)
@@ -366,7 +367,7 @@ minetest.register_on_dignode(function(pos, oldnode, digger)
             if selected.type == "node" then
                 next_node = selected.name
             elseif selected.type == "chest" then
-                next_node = "mcl_chests:chest"
+                next_node = EODP_CHEST
                 local chest_count = storage:get_int("chest_count") or 0
                 chest_count = chest_count + 1
                 storage:set_int("chest_count", chest_count)
@@ -376,7 +377,7 @@ minetest.register_on_dignode(function(pos, oldnode, digger)
             end
         end
         minetest.set_node(nether_pos, {name = next_node})
-        if next_node == "mcl_chests:chest" and chests_manager and chests_manager.populate then
+        if next_node == EODP_CHEST and chests_manager and chests_manager.populate then
             local captured_pos = vector.new(nether_pos)
             local captured_phase = current_phase_index
             local captured_special = chest_special
@@ -406,22 +407,23 @@ minetest.register_on_dignode(function(pos, oldnode, digger)
 
         local selected = choose_weighted(current_phase.items, pr)
         local next_node = "mcl_end:end_stone"
+        local chest_special
 
         if selected then
             if selected.type == "node" then
                 next_node = selected.name
             elseif selected.type == "chest" then
-                next_node = "mcl_chests:chest"
+                next_node = EODP_CHEST
                 local chest_count = storage:get_int("chest_count") or 0
                 chest_count = chest_count + 1
                 storage:set_int("chest_count", chest_count)
-                local is_special = (chest_count % 4 == 0)
-                if chests_manager and chests_manager.populate then
-                    chests_manager.populate(end_pos, current_phase_index, is_special)
-                end
+                chest_special = (chest_count % 4 == 0)
             end
         end
         minetest.set_node(end_pos, {name = next_node})
+        if next_node == EODP_CHEST and chests_manager and chests_manager.populate then
+            chests_manager.populate(end_pos, current_phase_index, chest_special)
+        end
         if digger and digger.is_player and digger:is_player() then
             snap_player(digger, end_pos)
         end
@@ -495,7 +497,7 @@ local function give_nether_recovery_compass(player, nether_pos, portal_pos)
         return
     end
 
-    minetest.set_node(chest_pos, {name = "mcl_chests:chest"})
+    minetest.set_node(chest_pos, {name = EODP_CHEST})
     local chest_meta = minetest.get_meta(chest_pos)
     chest_meta:set_int("eodp_temporary_nether_compass", 1)
     local chest_inv = chest_meta:get_inventory()

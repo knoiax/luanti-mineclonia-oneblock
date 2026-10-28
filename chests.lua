@@ -3,40 +3,6 @@ local chests = {}
 local PREFIX = mcl_eodp.prefix.de_papi
 local IF_PREFIX = mcl_eodp.prefix.italian_food
 
-local function cleanup_empty_chest(pos)
-    local meta = minetest.get_meta(pos)
-    local inv = meta:get_inventory()
-
-    if meta:get_int("eodp_temporary_nether_compass") == 1 then
-        -- Este cofre temporal existe únicamente para entregar la brújula.
-        -- Retirarla lo elimina, aunque el jugador haya dejado otros objetos.
-        if not inv:contains_item("main", "mcl_compass:compass_recovery") then
-            minetest.remove_node(pos)
-        end
-        return
-    end
-
-    if not inv:is_empty("main") then return end
-    -- Mantiene el comportamiento que ya usaban los cofres del OneBlock.
-    minetest.set_node(pos, {name = "mcl_core:dirt_with_grass"})
-end
-
-local function chest_inventory_changed(pos)
-    minetest.after(0, cleanup_empty_chest, pos)
-end
-
-minetest.override_item("mcl_chests:chest_small", {
-    drop = "",
-    on_metadata_inventory_take = chest_inventory_changed,
-    on_metadata_inventory_move = chest_inventory_changed,
-})
-
-minetest.override_item("mcl_chests:chest", {
-    drop = "",
-    on_metadata_inventory_take = chest_inventory_changed,
-    on_metadata_inventory_move = chest_inventory_changed,
-})
-
 -- ====================================================================
 -- TABLAS GLOBALES DE COFRES POR DIMENSIÓN
 -- ====================================================================
@@ -279,6 +245,7 @@ end
 function chests.populate(pos, phase_index, is_special)
     local meta = minetest.get_meta(pos)
     local inv = meta:get_inventory()
+    meta:set_int("eodp_oneblock_chest", 1)
     inv:set_size("main", 27) -- Asegurar el tamaño estándar del cofre de Mineclonia
 
     local loot_data = chests.loot_tables[phase_index] or chests.loot_tables[1]
